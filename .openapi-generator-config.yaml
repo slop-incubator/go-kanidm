@@ -1,0 +1,10 @@
+generatorName: go
+inputSpec: schemas/kanidm-openapi.json
+outputDir: gen/kanidm
+additionalProperties:
+  packageName: kanidmgen
+  generateInterfaces: true   # Enables interface-based mocking in unit tests
+  structPrefix: true         # Prefixes model structs to avoid name collisions
+  isGoSubmodule: true        # Suppresses go.mod generation (we manage one root module)
+  withGoMod: false
+ignoreFileOverride: .openapi-generator-ignore

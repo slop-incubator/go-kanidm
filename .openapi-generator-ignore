@@ -1,0 +1,6 @@
+# Files listed here are never overwritten by openapi-generator.
+# The preferred approach is to put all hand-written logic in kanidm/
+# rather than patching generated files. Only add entries here as a last resort.
+
+# Example (uncomment to protect a specific file):
+# gen/kanidm/api_custom.go
