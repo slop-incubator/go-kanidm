@@ -1,0 +1,61 @@
+# .github/dependabot.yml
+#
+# Dependabot configuration for kanidm-go.
+#
+# Ecosystems tracked:
+#   - gomod        : Go module dependencies (go.mod)
+#   - github-actions: Actions used in .github/workflows/
+#
+# npm is intentionally omitted: @openapitools/openapi-generator-cli is
+# installed ad-hoc inside the generate workflow and has no package.json
+# manifest in this repository. Dependabot requires a manifest to track
+# npm dependencies; without one it would silently do nothing.
+#
+# Security note: GitHub Actions should be pinned to commit SHAs rather
+# than mutable version tags (e.g. @v4) to prevent supply-chain attacks.
+# Dependabot will propose SHA-pinned updates for the github-actions
+# ecosystem. Accept those updates — they are the secure default.
+
+version: 2
+
+updates:
+  # ── Go modules ────────────────────────────────────────────────────────────
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: weekly
+      day: tuesday      # Tuesdays: review Go deps mid-week, not alongside
+      time: "09:00"     # other Monday automation (generate.yml runs Mondays)
+      timezone: UTC
+    open-pull-requests-limit: 10
+    labels:
+      - dependencies
+      - go
+    commit-message:
+      prefix: "chore(deps)"   # consistent with the repo's chore: convention
+    # Keep indirect (transitive) dependencies up to date too.
+    # They often carry the actual CVEs while direct deps lag behind.
+    allow:
+      - dependency-type: all
+
+  # ── GitHub Actions ─────────────────────────────────────────────────────────
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: wednesday    # Wednesdays: review actions after Go deps have landed
+      time: "09:00"
+      timezone: UTC
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+      - github-actions
+    commit-message:
+      prefix: "chore(ci)"
+    # Group all Actions updates into a single PR to reduce review noise.
+    # Each action is still listed individually in the PR body so reviewers
+    # can assess changelogs before merging.
+    groups:
+      github-actions-all:
+        patterns:
+          - "*"
