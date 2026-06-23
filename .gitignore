@@ -1,0 +1,113 @@
+# =============================================================================
+# Go
+# =============================================================================
+# Compiled binaries and test output
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+.gopath/
+
+# Go build cache
+/vendor/
+
+# Go workspace file (opt-in only — commit go.work only if this is a multi-module workspace)
+go.work
+go.work.sum
+
+# Test coverage artifacts
+coverage.out
+coverage.html
+
+# =============================================================================
+# OpenAPI Generator
+# =============================================================================
+# The generated layer is committed, but the generator's own metadata/temp files are not
+gen/.openapi-generator/FILES
+gen/.openapi-generator/VERSION
+
+# If you ever switch to NOT committing gen/, uncomment this:
+# gen/
+
+# =============================================================================
+# Schemas — snapshots ARE committed; downloaded temp copies are not
+# =============================================================================
+# Timestamped or temp schema downloads (see scripts/generate.sh)
+schemas/kanidm-openapi-*.json.tmp
+schemas/*.bak
+
+# =============================================================================
+# Secrets and credentials — never commit these
+# =============================================================================
+.env
+.env.*
+!.env.example        # Template is safe to commit
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+# Kanidm token files (if any tooling writes them locally)
+*.token
+kanidm-token
+
+# =============================================================================
+# Test and integration artifacts
+# =============================================================================
+# Integration test state (written by tests using KANIDM_URL / KANIDM_TOKEN)
+tests/integration/testdata/output/
+tests/integration/.kanidm-test-*
+
+# =============================================================================
+# Docker / local dev
+# =============================================================================
+# Local docker-compose overrides (personal dev settings)
+docker-compose.override.yml
+docker-compose.local.yml
+# Kanidm server data volume if mounted locally
+kanidm-data/
+
+# =============================================================================
+# Editor and OS
+# =============================================================================
+# JetBrains (GoLand, IntelliJ)
+.idea/
+*.iml
+
+# VS Code
+.vscode/
+!.vscode/extensions.json   # Recommended extensions are fine to share
+!.vscode/settings.json.example
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# =============================================================================
+# Toolchain / linting
+# =============================================================================
+# golangci-lint cache
+.golangci-lint-cache/
+# goreleaser dist output
+dist/
+
+# =============================================================================
+# Miscellaneous
+# =============================================================================
+# Local notes / scratch files
+TODO.local.md
+NOTES.local.md
+scratch/
