@@ -21,7 +21,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yourorg/kanidm-go/kanidm"
+	"github.com/slop-incubator/go-kanidm/kanidm"
 )
 
 func newTestClient(t *testing.T) *kanidm.Client {

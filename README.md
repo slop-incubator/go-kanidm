@@ -17,7 +17,7 @@ kanidm-go/
 ## Installation
 
 ```bash
-go get github.com/yourorg/kanidm-go/kanidm
+go get github.com/slop-incubator/go-kanidm/kanidm
 ```
 
 ## Quick Start
@@ -28,7 +28,7 @@ import (
     "log"
     "os"
 
-    "github.com/yourorg/kanidm-go/kanidm"
+    "github.com/slop-incubator/go-kanidm/kanidm"
 )
 
 func main() {

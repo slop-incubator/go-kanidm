@@ -10,7 +10,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/yourorg/kanidm-go/internal/retry"
+	"github.com/slop-incubator/go-kanidm/internal/retry"
 )
 
 func TestTransport_SuccessOnFirstAttempt(t *testing.T) {

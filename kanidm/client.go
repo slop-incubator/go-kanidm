@@ -21,7 +21,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/yourorg/kanidm-go/internal/retry"
+	"github.com/slop-incubator/go-kanidm/internal/retry"
 )
 
 // Client is the top-level Kanidm API client. Create one with New() and reuse

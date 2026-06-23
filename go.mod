@@ -1,4 +1,4 @@
-module github.com/yourorg/kanidm-go
+module github.com/slop-incubator/go-kanidm
 
 go 1.22
 
