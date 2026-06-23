@@ -1,30 +1,38 @@
+version: "2"
 linters:
   enable:
-    - errcheck       # Unchecked errors
-    - gosimple       # Simplification suggestions
-    - govet          # go vet checks
-    - ineffassign    # Unused assignments
-    - staticcheck    # Static analysis
-    - unused         # Unused code
-    - gosec          # Security issues (G402 is nosec'd in client.go)
-    - misspell       # Common misspellings
-    - gofmt          # Formatting
-    - goimports      # Import ordering
-
-linters-settings:
-  gosec:
-    excludes:
-      - G402  # TLS InsecureSkipVerify — intentionally exposed with clear naming
-
-issues:
-  exclude-rules:
-    # Allow TLSSkipVerify in client.go (explicitly marked #nosec G402)
-    - path: kanidm/client\.go
-      linters: [gosec]
-      text: "G402"
-    # Don't require error checks in test cleanup funcs
-    - path: tests/
-      linters: [errcheck]
-
-run:
-  timeout: 5m
+    - gosec
+    - misspell
+  settings:
+    gosec:
+      excludes:
+        - G402
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - gosec
+        path: kanidm/client\.go
+        text: G402
+      - linters:
+          - errcheck
+        path: tests/
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
