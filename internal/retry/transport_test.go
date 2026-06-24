@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/slop-incubator/go-kanidm/internal/retry"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/slop-incubator/go-kanidm/internal/retry"
 )
 
 func TestTransport_SuccessOnFirstAttempt(t *testing.T) {

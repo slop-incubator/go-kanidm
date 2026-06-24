@@ -12,8 +12,8 @@ const requestIDHeader = "X-Kanidm-Request-ID"
 // request. This enables server-side tracing without leaking user identity.
 // It never logs the Authorization header or any credential.
 type requestIDTransport struct {
-	base      http.RoundTripper
-	idFunc    func() string
+	base   http.RoundTripper
+	idFunc func() string
 }
 
 func newRequestIDTransport(base http.RoundTripper, idFunc func() string) http.RoundTripper {

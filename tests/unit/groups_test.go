@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
+	"github.com/slop-incubator/go-kanidm/kanidm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/slop-incubator/go-kanidm/kanidm"
 )
 
 func TestGroupsService_GetGroup_Success(t *testing.T) {

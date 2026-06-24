@@ -19,10 +19,10 @@ type rawGroup struct {
 }
 
 type rawGroupAttrs struct {
-	UUID    []string `json:"uuid"`
-	Name    []string `json:"name"`
-	SPN     []string `json:"spn"`
-	Member  []string `json:"member"`
+	UUID   []string `json:"uuid"`
+	Name   []string `json:"name"`
+	SPN    []string `json:"spn"`
+	Member []string `json:"member"`
 }
 
 // --- public methods ---

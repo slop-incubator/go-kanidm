@@ -3,9 +3,9 @@ package unit_test
 import (
 	"testing"
 
+	"github.com/slop-incubator/go-kanidm/kanidm"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"github.com/slop-incubator/go-kanidm/kanidm"
 )
 
 func TestNew_MissingBaseURL(t *testing.T) {
