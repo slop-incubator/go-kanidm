@@ -14,7 +14,7 @@ import (
 
 func TestGroupsService_GetGroup_Success(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		assert.Equal(t, "/v1/group/admins%40example.com", r.URL.RequestURI())
+		assert.Equal(t, "/v1/group/admins@example.com", r.URL.RequestURI())
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]any{
 			"attrs": map[string]any{

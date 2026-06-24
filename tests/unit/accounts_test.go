@@ -27,7 +27,7 @@ func newTestClient(t *testing.T, serverURL string) *kanidm.Client {
 func TestAccountsService_GetUser_Success(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodGet, r.Method)
-		assert.Equal(t, "/v1/account/alice%40example.com", r.URL.RequestURI())
+		assert.Equal(t, "/v1/account/alice@example.com", r.URL.RequestURI())
 		assert.Equal(t, "Bearer test-token", r.Header.Get("Authorization"))
 
 		w.Header().Set("Content-Type", "application/json")
