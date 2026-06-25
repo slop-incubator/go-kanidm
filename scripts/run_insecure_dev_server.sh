@@ -34,7 +34,7 @@ if [ ! -f "${CONFIG_FILE}" ]; then
 fi
 
 docker pull docker.io/kanidm/server:${KANIDM_TAG}
-docker rm kanidev 2> /dev/null || true
+docker rm kanidev -f 2> /dev/null || true
 docker create --name kanidev \
   -p '8443:8443' \
   -p '3636:3636' \
@@ -42,7 +42,7 @@ docker create --name kanidev \
   docker.io/kanidm/server:${KANIDM_TAG}
 
 docker cp $CONFIG_FILE kanidev:/data/server.toml
-docker run --rm -i -t -v $KANI_TMP:/data \
+docker run --rm -v $KANI_TMP:/data \
   docker.io/kanidm/server:${KANIDM_TAG} \
   kanidmd cert-generate
 docker start kanidev
