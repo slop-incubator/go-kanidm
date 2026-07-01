@@ -10,7 +10,7 @@
 set -euo pipefail
 
 SCHEMA="${1:-schemas/kanidm-openapi.json}"
-OUT_DIR="gen/kanidm"
+OUT_DIR="internal/api"
 
 if [[ ! -f "${SCHEMA}" ]]; then
   echo "ERROR: schema file not found: ${SCHEMA}" >&2
@@ -26,7 +26,8 @@ openapi-generator-cli generate \
   -i "${SCHEMA}" \
   -g go \
   -o "${OUT_DIR}" \
-  -c .openapi-generator-config.yaml
+  -c .openapi-generator-config.yaml \
+  --git-repo-id go-kanidm/internal --git-user-id slop-incubator \
 
 # Remove generated module files — the root go.mod owns all dependencies.
 rm -f "${OUT_DIR}/go.mod" "${OUT_DIR}/go.sum"

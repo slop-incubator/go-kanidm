@@ -1,3 +1,0 @@
-# This directory is populated by `make generate` (scripts/generate.sh).
-# Do not edit files here by hand — they are overwritten on every generation.
-# Put custom logic in kanidm/ instead.

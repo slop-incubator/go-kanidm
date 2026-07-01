@@ -53,18 +53,18 @@
             export GOCACHE="$GOPATH/cache/build"
             export PATH="$GOPATH/bin:$PATH"
 
-            # ── Remind devs never to edit gen/ by hand ────────────────────
+            # ── Remind devs never to edit internal/api/ by hand ────────────────────
             echo ""
             echo "  kanidm-go dev shell ready"
             echo ""
             echo "  Useful targets:"
-            echo "    make generate        — validate schema + regenerate gen/"
+            echo "    make generate        — validate schema + regenerate internal/api/"
             echo "    make test            — run unit tests"
             echo "    make test-integration — run integration tests (needs KANIDM_URL + KANIDM_TOKEN)"
             echo "    make lint            — golangci-lint"
             echo "    make schema          — pull live schema (needs KANIDM_URL)"
             echo ""
-            echo "  ⚠  Never edit files under gen/ by hand — they are fully regenerated."
+            echo "  ⚠  Never edit files under internal/api/ by hand — they are fully regenerated."
             echo ""
           '';
         };
