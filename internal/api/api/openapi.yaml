@@ -1,0 +1,7903 @@
+openapi: 3.1.0
+info:
+  contact:
+    name: Kanidm Github
+    url: https://github.com/kanidm/kanidm
+  description: API for interacting with the Kanidm system. This is a work in progress.
+  license:
+    name: MPL-2.0
+  title: Kanidm
+  version: 1.10.4
+externalDocs:
+  description: Kanidm documentation page
+  url: https://kanidm.com/docs
+servers:
+- url: "https://{host}:{port}"
+  variables:
+    host:
+      default: localhost
+      description: Server's hostname
+    port:
+      default: "8443"
+      description: Server HTTPS port
+tags:
+- description: Kanidm API
+  name: kanidm
+paths:
+  /robots.txt:
+    get:
+      operationId: robots_txt
+      responses:
+        "200":
+          description: Ok
+      tags:
+      - ui
+  /scim/v1/Application:
+    get:
+      operationId: scim_application_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    post:
+      operationId: scim_application_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScimEntryPostGeneric"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Application/{id}:
+    delete:
+      operationId: scim_application_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    get:
+      operationId: scim_application_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Attribute:
+    get:
+      operationId: scim_schema_attribute_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Class:
+    get:
+      operationId: scim_schema_class_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Entry:
+    get:
+      operationId: scim_entry_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    post:
+      operationId: scim_entry_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScimEntryPostGeneric"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    put:
+      operationId: scim_entry_put
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScimEntryPutGeneric"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Entry/{id}:
+    delete:
+      operationId: scim_entry_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    get:
+      operationId: scim_entry_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Message:
+    get:
+      operationId: scim_message_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Message/_ready:
+    get:
+      operationId: scim_message_ready_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimListResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Message/{id}:
+    get:
+      operationId: scim_message_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Message/{id}/_sent:
+    delete:
+      operationId: scim_message_id_sent_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Person/{id}:
+    get:
+      operationId: scim_person_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Person/{id}/Application/_create_password:
+    post:
+      operationId: scim_person_id_application_create_password
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScimApplicationPasswordCreate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimApplicationPassword"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Person/{id}/Application/{apppwd_uuid}:
+    get:
+      operationId: scim_person_id_application_delete_password
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: apppwd_uuid
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Person/{id}/_messages/_send_test:
+    get:
+      operationId: scim_person_id_message_send_test_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimEntry"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /scim/v1/Sync:
+    get:
+      operationId: scim_sync_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ScimSyncState"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+    post:
+      operationId: scim_sync_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ScimSyncRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - scim
+  /status:
+    get:
+      operationId: status
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: boolean
+          description: Ok
+      summary: "Status endpoint used for health checks, returns true when the server\
+        \ is up."
+      tags:
+      - system
+  /ui/images/oauth2/{rs_name}:
+    get:
+      operationId: oauth2_image_get
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/octet-stream:
+              schema:
+                items:
+                  format: int32
+                  minimum: 0
+                  type: integer
+                type: array
+          description: Ok
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: This returns the image for the OAuth2 Resource Server if the user has
+        permissions
+      tags:
+      - ui
+  /v1/account/{id}/_radius/_token:
+    get:
+      operationId: account_id_radius_token_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RadiusAuthToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+    post:
+      operationId: account_id_radius_token_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RadiusAuthToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_ssh_pubkeys:
+    get:
+      deprecated: true
+      operationId: account_id_ssh_pubkeys_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_ssh_pubkeys/{tag}:
+    get:
+      operationId: account_id_ssh_pubkeys_tag_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: tag
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_unix/_auth:
+    post:
+      operationId: account_id_unix_auth_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SingleStringRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/UnixUserToken"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_unix/_token:
+    post:
+      operationId: account_id_unix_token
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnixUserToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_user_auth_token:
+    get:
+      operationId: account_id_user_auth_token_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/account/{id}/_user_auth_token/{token_id}:
+    get:
+      operationId: account_user_auth_token_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: token_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - account
+  /v1/auth:
+    post:
+      operationId: auth_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - auth
+  /v1/auth/valid:
+    get:
+      operationId: auth_valid
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - auth
+  /v1/credential/_cancel:
+    post:
+      operationId: credential_update_cancel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CUSessionToken"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - credential
+  /v1/credential/_commit:
+    post:
+      operationId: credential_update_commit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CUSessionToken"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - credential
+  /v1/credential/_exchange_intent:
+    post:
+      operationId: credential_update_exchange_intent
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - credential
+  /v1/credential/_status:
+    post:
+      operationId: credential_update_status
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CUSessionToken"
+        required: true
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - credential
+  /v1/credential/_update:
+    post:
+      operationId: credential_update_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items: {}
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CUStatus"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - credential
+  /v1/debug/ipinfo:
+    get:
+      operationId: debug_ipinfo
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: Ok
+      security:
+      - token_jwt: []
+      tags:
+      - debug
+  /v1/domain:
+    get:
+      operationId: domain_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - domain
+  /v1/domain/_attr/{attr}:
+    delete:
+      operationId: domain_attr_delete
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              nullable: true
+              type: array
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - domain
+    get:
+      operationId: domain_attr_get
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                nullable: true
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - domain
+    put:
+      operationId: domain_attr_put
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - domain
+  /v1/domain/_image:
+    delete:
+      operationId: domain_image_delete
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - domain
+    post:
+      description: |-
+        It requires a multipart form with the image file, and the content type must be one of the
+        [VALID_IMAGE_UPLOAD_CONTENT_TYPES].
+      operationId: domain_image_post
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: API endpoint for creating/replacing the image associated with an OAuth2
+        Resource Server.
+      tags:
+      - domain
+  /v1/group:
+    get:
+      operationId: group_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Returns all groups visible  to the user
+      tags:
+      - group
+    post:
+      operationId: group_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+              - $ref: "#/components/schemas/Entry"
+              nullable: true
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group
+  /v1/group/_search/{id}:
+    get:
+      operationId: group_search_id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group
+  /v1/group/{id}:
+    delete:
+      operationId: group_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group
+    get:
+      operationId: group_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group
+    patch:
+      operationId: group_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group
+  /v1/group/{id}/_attr/{attr}:
+    delete:
+      operationId: group_id_attr_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              nullable: true
+              type: array
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/attr
+    get:
+      operationId: group_id_attr_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/attr
+    post:
+      operationId: group_id_attr_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/attr
+    put:
+      operationId: group_id_attr_put
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/attr
+  /v1/group/{id}/_unix:
+    post:
+      operationId: group_id_unix_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GroupUnixExtend"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/unix
+  /v1/group/{id}/_unix/_token:
+    get:
+      operationId: group_id_unix_token_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UnixGroupToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - group/unix
+  /v1/jwk/{key_id}:
+    get:
+      operationId: public_jwk_key_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SchemaJwk"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - jwk
+  /v1/logout:
+    get:
+      operationId: logout
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - auth
+  /v1/oauth2:
+    get:
+      operationId: oauth2_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Lists all the OAuth2 Resource Servers
+      tags:
+      - oauth2
+  /v1/oauth2/_basic:
+    post:
+      operationId: oauth2_basic_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Create a new Confidential OAuth2 client that authenticates with Http
+        Basic.
+      tags:
+      - oauth2
+  /v1/oauth2/_public:
+    post:
+      operationId: oauth2_public_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Create a new Public OAuth2 client
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}:
+    delete:
+      operationId: oauth2_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+        "404":
+          description: ""
+      security:
+      - token_jwt: []
+      summary: Delete an OAuth2 Resource Server
+      tags:
+      - oauth2
+    get:
+      operationId: oauth2_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Get the details of a given OAuth2 Resource Server.
+      tags:
+      - oauth2
+    patch:
+      operationId: oauth2_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Modify an OAuth2 Resource Server
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_basic_secret:
+    get:
+      operationId: oauth2_id_get_basic_secret
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                nullable: true
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Get the basic secret for a given OAuth2 Resource Server. This is used
+        for authentication.
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_claimmap/{claim_name}:
+    post:
+      operationId: oauth2_id_claimmap_join_post
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: claim_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Oauth2ClaimMapJoin"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Modify the claim map join strategy for a given OAuth2 Resource Server
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_claimmap/{claim_name}/{group}:
+    delete:
+      operationId: oauth2_id_claimmap_delete
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: claim_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - oauth2
+    post:
+      operationId: oauth2_id_claimmap_post
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: claim_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Modify the claim map for a given OAuth2 Resource Server
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_image:
+    delete:
+      operationId: oauth2_id_image_delete
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - oauth2
+    post:
+      description: |-
+        It requires a multipart form with the image file, and the content type must be one of the
+        [VALID_IMAGE_UPLOAD_CONTENT_TYPES].
+      operationId: oauth2_id_image_post
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: API endpoint for creating/replacing the image associated with an OAuth2
+        Resource Server.
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_scopemap/{group}:
+    delete:
+      operationId: oauth2_id_scopemap_delete
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - oauth2
+    post:
+      operationId: oauth2_id_scopemap_post
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Modify the scope map for a given OAuth2 Resource Server
+      tags:
+      - oauth2
+  /v1/oauth2/{rs_name}/_sup_scopemap/{group}:
+    delete:
+      operationId: oauth2_id_sup_scopemap_delete
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - oauth2
+    post:
+      operationId: oauth2_id_sup_scopemap_post
+      parameters:
+      - explode: false
+        in: path
+        name: rs_name
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: group
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Create a supplemental scope map for a given OAuth2 Resource Server
+      tags:
+      - oauth2
+  /v1/person:
+    get:
+      operationId: person_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+    post:
+      operationId: person_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Expects the following fields in the attrs field of the req: [name,\
+        \ displayname]"
+      tags:
+      - person
+  /v1/person/_search/{id}:
+    get:
+      operationId: person_search_id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+  /v1/person/{id}:
+    delete:
+      operationId: person_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+    get:
+      operationId: person_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+    patch:
+      operationId: person_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+  /v1/person/{id}/_attr/{attr}:
+    delete:
+      operationId: person_id_delete_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/attr
+    get:
+      operationId: person_id_get_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                nullable: true
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/attr
+    post:
+      operationId: person_id_post_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/attr
+    put:
+      operationId: person_id_put_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/attr
+  /v1/person/{id}/_certificate:
+    get:
+      operationId: person_get_id_certificate
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/certificate
+    post:
+      description: The person's id will be added implicitly as a reference.
+      operationId: person_post_id_certificate
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Expects the following fields in the attrs field of the req: [certificate]"
+      tags:
+      - person/certificate
+  /v1/person/{id}/_credential/_status:
+    get:
+      operationId: person_get_id_credential_status
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/credential
+  /v1/person/{id}/_credential/_update:
+    get:
+      operationId: person_id_credential_update_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/credential
+  /v1/person/{id}/_credential/_update_intent:
+    get:
+      operationId: person_id_credential_update_intent_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/credential
+  /v1/person/{id}/_credential/_update_intent/{ttl}:
+    get:
+      operationId: person_id_credential_update_intent_ttl_get
+      parameters:
+      - description: The new TTL for the credential?
+        explode: false
+        in: path
+        name: ttl
+        required: true
+        schema:
+          format: int64
+          minimum: 0
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CUIntentToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/credential
+  /v1/person/{id}/_credential/_update_intent_send:
+    post:
+      operationId: person_id_credential_update_intent_send_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CUIntentSend"
+        required: true
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/credential
+  /v1/person/{id}/_identify/_user:
+    post:
+      operationId: person_identify_user_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/IdentifyUserRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/IdentifyUserResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person
+  /v1/person/{id}/_radius:
+    delete:
+      operationId: person_id_radius_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/radius
+    get:
+      operationId: person_id_radius_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Get and return a single str
+      tags:
+      - person/radius
+    post:
+      operationId: person_id_radius_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/radius
+  /v1/person/{id}/_radius/_token:
+    get:
+      operationId: person_id_radius_token_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RadiusAuthToken"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/radius
+  /v1/person/{id}/_ssh_pubkeys:
+    get:
+      operationId: person_id_ssh_pubkeys_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/ssh_pubkeys
+    post:
+      operationId: person_id_ssh_pubkeys_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items: {}
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+        "422":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+      security:
+      - token_jwt: []
+      tags:
+      - person/ssh_pubkeys
+  /v1/person/{id}/_ssh_pubkeys/{tag}:
+    delete:
+      operationId: person_id_ssh_pubkeys_tag_delete
+      parameters:
+      - description: The tag of the SSH key
+        explode: false
+        in: path
+        name: tag
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/ssh_pubkeys
+    get:
+      operationId: person_id_ssh_pubkeys_tag_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: tag
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/ssh_pubkeys
+  /v1/person/{id}/_unix:
+    post:
+      operationId: person_id_unix_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountUnixExtend"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/unix
+  /v1/person/{id}/_unix/_credential:
+    delete:
+      operationId: person_id_unix_credential_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/unix
+    put:
+      operationId: person_id_unix_credential_put
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SingleStringRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - person/unix
+  /v1/raw/create:
+    post:
+      operationId: raw_create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Raw request to the system, be warned this can be dangerous!"
+      tags:
+      - raw
+  /v1/raw/delete:
+    post:
+      operationId: raw_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Raw request to the system, be warned this can be dangerous!"
+      tags:
+      - raw
+  /v1/raw/modify:
+    post:
+      operationId: raw_modify
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ModifyRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Raw request to the system, be warned this can be dangerous!"
+      tags:
+      - raw
+  /v1/raw/search:
+    post:
+      operationId: raw_search
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SearchRequest"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SearchResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: "Raw request to the system, be warned this can be dangerous!"
+      tags:
+      - raw
+  /v1/reauth:
+    post:
+      operationId: reauth_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthIssueSession"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - auth
+  /v1/recycle_bin:
+    post:
+      operationId: recycle_bin_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - recycle_bin
+  /v1/recycle_bin/{id}:
+    get:
+      operationId: recycle_bin_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - recycle_bin
+  /v1/recycle_bin/{id}/_revive:
+    post:
+      operationId: recycle_bin_revive_id_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - recycle_bin
+  /v1/schema:
+    get:
+      operationId: schema_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - schema
+  /v1/schema/attributetype:
+    get:
+      operationId: schema_attributetype_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - schema
+  /v1/schema/attributetype/{id}:
+    get:
+      operationId: schema_attributetype_get_id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - schema
+  /v1/schema/classtype:
+    get:
+      operationId: schema_classtype_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - schema
+  /v1/schema/classtype/{id}:
+    get:
+      operationId: schema_classtype_get_id
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - schema
+  /v1/self:
+    get:
+      operationId: whoami
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WhoamiResponse"
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - self
+  /v1/self/_applinks:
+    get:
+      operationId: self_applinks_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/AppLink"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Returns your OAuth2 app links for the Web UI
+      tags:
+      - self
+  /v1/self/_uat:
+    get:
+      operationId: whoami_uat
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAuthToken"
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - self
+  /v1/service_account:
+    get:
+      operationId: service_account_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    post:
+      operationId: service_account_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}:
+    delete:
+      operationId: service_account_id_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    get:
+      operationId: service_account_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    patch:
+      operationId: service_account_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_api_token:
+    get:
+      operationId: service_account_api_token_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/ApiToken"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    post:
+      operationId: service_account_api_token_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApiTokenGenerate"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_api_token/{token_id}:
+    delete:
+      operationId: service_account_api_token_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: token_id
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_attr/{attr}:
+    delete:
+      operationId: service_account_id_delete_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    get:
+      operationId: service_account_id_get_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                nullable: true
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    post:
+      operationId: service_account_id_post_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    put:
+      operationId: service_account_id_put_attr
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_credential/_generate:
+    get:
+      operationId: service_account_credential_generate
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_credential/_status:
+    get:
+      operationId: service_account_id_credential_status_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_into_person:
+    post:
+      deprecated: true
+      description: In the future this will be REMOVED!
+      operationId: service_account_into_person
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: |-
+        Due to how the migrations work in 6 -> 7, we can accidentally
+        mark "accounts" as service accounts when they are persons. This
+        allows migrating them to the person type due to its similarities.
+      tags:
+      - service_account
+  /v1/service_account/{id}/_ssh_pubkeys:
+    get:
+      operationId: service_account_id_ssh_pubkeys_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    post:
+      operationId: service_account_id_ssh_pubkeys_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items: {}
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+        "422":
+          content:
+            text/plain:
+              schema:
+                type: string
+          description: Unprocessable Entity
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_ssh_pubkeys/{tag}:
+    delete:
+      operationId: service_account_id_ssh_pubkeys_tag_delete
+      parameters:
+      - description: The tag of the SSH key
+        explode: false
+        in: path
+        name: tag
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+    get:
+      operationId: service_account_id_ssh_pubkeys_tag_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: tag
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/service_account/{id}/_unix:
+    post:
+      operationId: service_account_id_unix_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AccountUnixExtend"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - service_account
+  /v1/sync_account:
+    get:
+      operationId: sync_account_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Get all? the sync accounts.
+      tags:
+      - sync_account
+    post:
+      operationId: sync_account_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+  /v1/sync_account/{id}:
+    get:
+      operationId: sync_account_id_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: "#/components/schemas/Entry"
+                nullable: true
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Get the details of a sync account
+      tags:
+      - sync_account
+    patch:
+      operationId: sync_account_id_patch
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Entry"
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      summary: Modify a sync account in-place
+      tags:
+      - sync_account
+  /v1/sync_account/{id}/_attr/{attr}:
+    get:
+      operationId: sync_account_id_attr_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                nullable: true
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+    post:
+      operationId: sync_account_id_attr_put
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+  /v1/sync_account/{id}/_finalise:
+    get:
+      operationId: sync_account_id_finalise_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+  /v1/sync_account/{id}/_sync_token:
+    delete:
+      operationId: sync_account_token_delete
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+    post:
+      operationId: sync_account_token_post
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          text/plain:
+            schema:
+              type: string
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: string
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+  /v1/sync_account/{id}/_terminate:
+    get:
+      operationId: sync_account_id_terminate_get
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - sync_account
+  /v1/system:
+    get:
+      operationId: system_get
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Entry"
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - system
+  /v1/system/_attr/{attr}:
+    delete:
+      operationId: system_attr_delete
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              nullable: true
+              type: array
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - system
+    get:
+      operationId: system_attr_get
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: string
+                nullable: true
+                type: array
+          description: ""
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - system
+    post:
+      operationId: system_attr_post
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - system
+    put:
+      operationId: system_attr_put
+      parameters:
+      - explode: false
+        in: path
+        name: attr
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                type: string
+              type: array
+        required: true
+      responses:
+        "200":
+          content:
+            application/json: {}
+          description: Ok
+        "400":
+          description: Invalid Request
+        "401":
+          description: Authorization required
+        "403":
+          description: Not Authorized
+      security:
+      - token_jwt: []
+      tags:
+      - system
+components:
+  schemas:
+    AccountUnixExtend:
+      additionalProperties: false
+      description: Request addition of unix attributes to an account
+      example:
+        shell: shell
+        gidnumber: 0
+      properties:
+        gidnumber:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+        shell:
+          description: The internal attribute is "loginshell" but we use shell in
+            the API currently
+          nullable: true
+          type: string
+    ApiToken:
+      example:
+        account_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        token_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        purpose: readonly
+        label: label
+        expiry: 2000-01-23T04:56:07.000+00:00
+        issued_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        token_id:
+          format: uuid
+          type: string
+        label:
+          type: string
+        expiry:
+          format: date-time
+          nullable: true
+          type: string
+        issued_at:
+          format: date-time
+          type: string
+        purpose:
+          $ref: "#/components/schemas/ApiTokenPurpose"
+      required:
+      - account_id
+      - issued_at
+      - label
+      - token_id
+    ApiTokenGenerate:
+      description: A request to generate a new API token for a service account
+      example:
+        read_write: true
+        compact: true
+        label: label
+        expiry: 2000-01-23T04:56:07.000+00:00
+      properties:
+        label:
+          type: string
+        expiry:
+          format: date-time
+          nullable: true
+          type: string
+        read_write:
+          type: boolean
+        compact:
+          type: boolean
+      required:
+      - label
+      - read_write
+    ApiTokenPurpose:
+      enum:
+      - readonly
+      - readwrite
+      - synchronise
+      type: string
+    AppLink:
+      description: |-
+        This is a description of a linked or connected application for a user. This is
+        used in the UI to render applications on the dashboard for a user to access.
+      example:
+        Oauth2:
+          has_image: true
+          name: name
+          display_name: display_name
+          redirect_url: https://openapi-generator.tech
+      properties:
+        Oauth2:
+          $ref: "#/components/schemas/AppLink_Oauth2"
+      required:
+      - Oauth2
+    Attribute:
+      oneOf:
+      - enum:
+        - account
+        type: string
+      - enum:
+        - accountexpire
+        type: string
+      - enum:
+        - accountvalidfrom
+        type: string
+      - enum:
+        - accountsoftlockexpire
+        type: string
+      - enum:
+        - acpcreateattr
+        type: string
+      - enum:
+        - acpcreateclass
+        type: string
+      - enum:
+        - acpenable
+        type: string
+      - enum:
+        - acpmodifyclass
+        type: string
+      - enum:
+        - acpmodifypresentclass
+        type: string
+      - enum:
+        - acpmodifyremoveclass
+        type: string
+      - enum:
+        - acpmodifypresentattr
+        type: string
+      - enum:
+        - acpmodifyremovedattr
+        type: string
+      - enum:
+        - acpreceiver
+        type: string
+      - enum:
+        - acpreceivergroup
+        type: string
+      - enum:
+        - acpsearchattr
+        type: string
+      - enum:
+        - acptargetscope
+        type: string
+      - enum:
+        - apitokensession
+        type: string
+      - enum:
+        - applicationpassword
+        type: string
+      - enum:
+        - applicationurl
+        type: string
+      - enum:
+        - attestedpasskeys
+        type: string
+      - enum:
+        - attr
+        type: string
+      - enum:
+        - attributename
+        type: string
+      - enum:
+        - attributetype
+        type: string
+      - enum:
+        - authsessionexpiry
+        type: string
+      - enum:
+        - authpasswordminimumlength
+        type: string
+      - enum:
+        - badlistpassword
+        type: string
+      - enum:
+        - certificate
+        type: string
+      - enum:
+        - cascadedeleted
+        type: string
+      - enum:
+        - claim
+        type: string
+      - enum:
+        - class
+        type: string
+      - enum:
+        - classname
+        type: string
+      - enum:
+        - cn
+        type: string
+      - enum:
+        - cookieprivatekey
+        type: string
+      - enum:
+        - createdatcid
+        type: string
+      - enum:
+        - credentialupdateintenttoken
+        type: string
+      - enum:
+        - credentialtypeminimum
+        type: string
+      - enum:
+        - deniedname
+        type: string
+      - enum:
+        - deleteafter
+        type: string
+      - enum:
+        - description
+        type: string
+      - enum:
+        - directmemberof
+        type: string
+      - enum:
+        - displayname
+        type: string
+      - enum:
+        - dn
+        type: string
+      - enum:
+        - domain
+        type: string
+      - enum:
+        - domainalloweastereggs
+        type: string
+      - enum:
+        - domainallowaccountrecovery
+        type: string
+      - enum:
+        - domaindevelopmenttaint
+        type: string
+      - enum:
+        - domaindisplayname
+        type: string
+      - enum:
+        - domainldapbasedn
+        type: string
+      - enum:
+        - domainname
+        type: string
+      - enum:
+        - domainssid
+        type: string
+      - enum:
+        - domaintokenkey
+        type: string
+      - enum:
+        - domainuuid
+        type: string
+      - enum:
+        - dyngroup
+        type: string
+      - enum:
+        - dyngroupfilter
+        type: string
+      - enum:
+        - dynmember
+        type: string
+      - enum:
+        - enabled
+        type: string
+      - enum:
+        - email
+        type: string
+      - enum:
+        - emailalternative
+        type: string
+      - enum:
+        - emailprimary
+        type: string
+      - enum:
+        - entrydn
+        type: string
+      - enum:
+        - entrymanagedby
+        type: string
+      - enum:
+        - entryuuid
+        type: string
+      - enum:
+        - es256privatekeyder
+        type: string
+      - enum:
+        - excludes
+        type: string
+      - enum:
+        - fernetprivatekeystr
+        type: string
+      - enum:
+        - gecos
+        type: string
+      - enum:
+        - gidnumber
+        type: string
+      - enum:
+        - grantuihint
+        type: string
+      - enum:
+        - group
+        type: string
+      - enum:
+        - hmacnamehistory
+        type: string
+      - enum:
+        - homedirectory
+        type: string
+      - enum:
+        - idverificationeckey
+        type: string
+      - enum:
+        - image
+        type: string
+      - enum:
+        - index
+        type: string
+      - enum:
+        - indexed
+        type: string
+      - enum:
+        - inmemoriam
+        type: string
+      - enum:
+        - ipanthash
+        type: string
+      - enum:
+        - ipasshpubkey
+        type: string
+      - enum:
+        - jwses256privatekey
+        type: string
+      - enum:
+        - keyactionrotate
+        type: string
+      - enum:
+        - keyactionrevoke
+        type: string
+      - enum:
+        - keyactionimportjwses256
+        type: string
+      - enum:
+        - keyactionimportjwsrs256
+        type: string
+      - enum:
+        - keyinternaldata
+        type: string
+      - enum:
+        - keyprovider
+        type: string
+      - enum:
+        - lastmodifiedcid
+        type: string
+      - enum:
+        - ldapallowunixpwbind
+        type: string
+      - description: An LDAP Compatible emailAddress
+        enum:
+        - ldapemailaddress
+        type: string
+      - description: An LDAP Compatible sshkeys virtual attribute
+        enum:
+        - ldapkeys
+        type: string
+      - enum:
+        - ldapmaxqueryableattrs
+        type: string
+      - enum:
+        - legalname
+        type: string
+      - enum:
+        - limitsearchmaxresults
+        type: string
+      - enum:
+        - limitsearchmaxfiltertest
+        type: string
+      - enum:
+        - linkedgroup
+        type: string
+      - enum:
+        - loginshell
+        type: string
+      - enum:
+        - mail
+        type: string
+      - enum:
+        - maildestination
+        type: string
+      - enum:
+        - may
+        type: string
+      - enum:
+        - member
+        type: string
+      - enum:
+        - membercreateonce
+        type: string
+      - enum:
+        - memberof
+        type: string
+      - enum:
+        - messagetemplate
+        type: string
+      - enum:
+        - multivalue
+        type: string
+      - enum:
+        - must
+        type: string
+      - enum:
+        - name
+        type: string
+      - enum:
+        - namehistory
+        type: string
+      - enum:
+        - noindex
+        type: string
+      - enum:
+        - nsuniqueid
+        type: string
+      - enum:
+        - nsaccountlock
+        type: string
+      - enum:
+        - oauth2allowinsecureclientdisablepkce
+        type: string
+      - enum:
+        - oauth2allowlocalhostredirect
+        type: string
+      - enum:
+        - oauth2authorisationendpoint
+        type: string
+      - enum:
+        - oauth2clientid
+        type: string
+      - enum:
+        - oauth2clientsecret
+        type: string
+      - enum:
+        - oauth2consentscopemap
+        type: string
+      - enum:
+        - oauth2deviceflowenable
+        type: string
+      - enum:
+        - oauth2jwtlegacycryptoenable
+        type: string
+      - enum:
+        - oauth2prefershortusername
+        type: string
+      - enum:
+        - oauth2refreshtokenexpiry
+        type: string
+      - enum:
+        - oauth2requestscopes
+        type: string
+      - enum:
+        - oauth2rsbasicsecret
+        type: string
+      - enum:
+        - oauth2rsclaimmap
+        type: string
+      - enum:
+        - oauth2rsimplicitscopes
+        type: string
+      - enum:
+        - oauth2rsname
+        type: string
+      - enum:
+        - oauth2rsorigin
+        type: string
+      - enum:
+        - oauth2rsoriginlanding
+        type: string
+      - enum:
+        - oauth2rsscopemap
+        type: string
+      - enum:
+        - oauth2rssupscopemap
+        type: string
+      - enum:
+        - oauth2rstokenkey
+        type: string
+      - enum:
+        - oauth2session
+        type: string
+      - enum:
+        - oauth2strictredirecturi
+        type: string
+      - enum:
+        - oauth2tokenendpoint
+        type: string
+      - enum:
+        - oauth2accountcredentialuuid
+        type: string
+      - enum:
+        - oauth2accountprovider
+        type: string
+      - enum:
+        - oauth2accountuniqueuserid
+        type: string
+      - enum:
+        - oauth2consentpromptenable
+        type: string
+      - enum:
+        - objectclass
+        type: string
+      - enum:
+        - othernoindex
+        type: string
+      - enum:
+        - passkeys
+        type: string
+      - enum:
+        - passwordimport
+        type: string
+      - enum:
+        - passwordchangedtime
+        type: string
+      - enum:
+        - patchlevel
+        type: string
+      - enum:
+        - phantom
+        type: string
+      - enum:
+        - primarycredential
+        type: string
+      - enum:
+        - privatecookiekey
+        type: string
+      - enum:
+        - privilegeexpiry
+        type: string
+      - enum:
+        - radiussecret
+        type: string
+      - enum:
+        - recycleddirectmemberof
+        type: string
+      - enum:
+        - refers
+        type: string
+      - enum:
+        - replicated
+        type: string
+      - enum:
+        - rs256privatekeyder
+        type: string
+      - enum:
+        - s256
+        type: string
+      - description: A set of scim schemas. This is similar to a kanidm class.
+        enum:
+        - schemas
+        type: string
+      - enum:
+        - scope
+        type: string
+      - enum:
+        - sendafter
+        type: string
+      - enum:
+        - sentat
+        type: string
+      - enum:
+        - sourceuuid
+        type: string
+      - enum:
+        - spn
+        type: string
+      - description: An LDAP-compatible sshpublickey
+        enum:
+        - ldapsshpublickey
+        type: string
+      - description: The Kanidm-local ssh_publickey
+        enum:
+        - sshpublickey
+        type: string
+      - enum:
+        - sudohost
+        type: string
+      - enum:
+        - supplements
+        type: string
+      - enum:
+        - systemsupplements
+        type: string
+      - enum:
+        - syncallowed
+        type: string
+      - enum:
+        - syncclass
+        type: string
+      - enum:
+        - synccookie
+        type: string
+      - enum:
+        - synccredentialportal
+        type: string
+      - enum:
+        - syncexternalid
+        type: string
+      - enum:
+        - syncparentuuid
+        type: string
+      - enum:
+        - synctokensession
+        type: string
+      - enum:
+        - syncyieldauthority
+        type: string
+      - enum:
+        - syntax
+        type: string
+      - enum:
+        - systemexcludes
+        type: string
+      - enum:
+        - systemmay
+        type: string
+      - enum:
+        - systemmust
+        type: string
+      - enum:
+        - term
+        type: string
+      - enum:
+        - totpimport
+        type: string
+      - enum:
+        - uid
+        type: string
+      - enum:
+        - uidnumber
+        type: string
+      - enum:
+        - unique
+        type: string
+      - enum:
+        - unixpassword
+        type: string
+      - enum:
+        - unixpasswordimport
+        type: string
+      - enum:
+        - userauthtokensession
+        type: string
+      - enum:
+        - userid
+        type: string
+      - enum:
+        - userpassword
+        type: string
+      - enum:
+        - uuid
+        type: string
+      - enum:
+        - version
+        type: string
+      - enum:
+        - webauthnattestationcalist
+        type: string
+      - enum:
+        - allowprimarycredfallback
+        type: string
+      - $ref: "#/components/schemas/Attribute_oneOf"
+    AuthAllowed:
+      description: |-
+        A challenge containing the list of allowed authentication types
+        that can satisfy the next step. These may have inner types with
+        required context.
+      oneOf:
+      - enum:
+        - anonymous
+        type: string
+      - enum:
+        - backupcode
+        type: string
+      - enum:
+        - password
+        type: string
+      - enum:
+        - totp
+        type: string
+      - $ref: "#/components/schemas/AuthAllowed_oneOf"
+      - $ref: "#/components/schemas/AuthAllowed_oneOf_1"
+    AuthCredential:
+      description: The credential challenge provided by a user.
+      oneOf:
+      - enum:
+        - anonymous
+        type: string
+      - $ref: "#/components/schemas/AuthCredential_oneOf"
+      - $ref: "#/components/schemas/AuthCredential_oneOf_1"
+      - $ref: "#/components/schemas/AuthAllowed_oneOf"
+      - $ref: "#/components/schemas/AuthCredential_oneOf_2"
+      - $ref: "#/components/schemas/AuthCredential_oneOf_3"
+    AuthIssueSession:
+      description: The type of session that should be issued to the client.
+      enum:
+      - token
+      - cookie
+      type: string
+    AuthMech:
+      description: The mechanisms that may proceed in this authentication
+      enum:
+      - anonymous
+      - password
+      - passwordbackupcode
+      - passwordmfa
+      - passwordsecuritykey
+      - passkey
+      - oauth2trust
+      type: string
+    AuthRequest:
+      description: A request for the next step of an authentication.
+      example:
+        step:
+          init: init
+      properties:
+        step:
+          $ref: "#/components/schemas/AuthStep"
+      required:
+      - step
+    AuthResponse:
+      example:
+        sessionid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        state:
+          choose:
+          - anonymous
+          - anonymous
+      properties:
+        sessionid:
+          format: uuid
+          type: string
+        state:
+          $ref: "#/components/schemas/AuthState"
+      required:
+      - sessionid
+      - state
+    AuthState:
+      description: The response to an AuthStep request.
+      oneOf:
+      - $ref: "#/components/schemas/AuthState_oneOf"
+      - $ref: "#/components/schemas/AuthState_oneOf_1"
+      - $ref: "#/components/schemas/AuthState_oneOf_2"
+      - $ref: "#/components/schemas/AuthState_oneOf_3"
+    AuthStep:
+      description: |-
+        Authentication to Kanidm is a stepped process.
+
+        The session is first initialised with the requested username.
+
+        In response the list of supported authentication mechanisms is provided.
+
+        The user chooses the authentication mechanism to proceed with.
+
+        The server responds with a challenge that the user provides a credential
+        to satisfy. This challenge and response process continues until a credential
+        fails to validate, an error occurs, or successful authentication is complete.
+      oneOf:
+      - $ref: "#/components/schemas/AuthStep_oneOf"
+      - $ref: "#/components/schemas/AuthStep_oneOf_1"
+      - $ref: "#/components/schemas/AuthStep_oneOf_2"
+      - $ref: "#/components/schemas/AuthStep_oneOf_3"
+    BTreeMap:
+      additionalProperties:
+        $ref: "#/components/schemas/BTreeMap_value"
+    BTreeSet:
+      type: object
+    BackupCodesView:
+      properties:
+        backup_codes:
+          items:
+            type: string
+          type: array
+      required:
+      - backup_codes
+    Base64UrlSafeData:
+      type: object
+    CUCredState:
+      enum:
+      - Modifiable
+      - DeleteOnly
+      - AccessDeny
+      - PolicyDeny
+      type: string
+    CUExtPortal:
+      oneOf:
+      - enum:
+        - None
+        type: string
+      - enum:
+        - Hidden
+        type: string
+      - $ref: "#/components/schemas/CUExtPortal_oneOf"
+    CUIntentSend:
+      description: |-
+        Structure denoting the parameters for triggering a credential update intent
+        token to be send to the account.
+      example:
+        ttl: 0
+        email: email
+      properties:
+        ttl:
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        email:
+          nullable: true
+          type: string
+    CUIntentToken:
+      example:
+        expiry_time: 2000-01-23T04:56:07.000+00:00
+        token: token
+      properties:
+        token:
+          type: string
+        expiry_time:
+          format: date-time
+          type: string
+      required:
+      - expiry_time
+      - token
+    CURegState:
+      oneOf:
+      - enum:
+        - None
+        type: string
+      - $ref: "#/components/schemas/CURegState_oneOf"
+      - enum:
+        - TotpTryAgain
+        type: string
+      - $ref: "#/components/schemas/CURegState_oneOf_1"
+      - enum:
+        - TotpInvalidSha1
+        type: string
+      - $ref: "#/components/schemas/CURegState_oneOf_2"
+      - $ref: "#/components/schemas/CURegState_oneOf_3"
+      - $ref: "#/components/schemas/CURegState_oneOf_4"
+    CURegWarning:
+      enum:
+      - MfaRequired
+      - PasskeyRequired
+      - AttestedPasskeyRequired
+      - AttestedResidentKeyRequired
+      - Unsatisfiable
+      - WebauthnAttestationUnsatisfiable
+      - WebauthnUserVerificationRequired
+      - NoValidCredentials
+      type: string
+    CUSessionToken:
+      example:
+        token: token
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    CUStatus:
+      example:
+        passkeys:
+        - tag: tag
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - tag: tag
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        can_commit: true
+        warnings:
+        - MfaRequired
+        - MfaRequired
+        attested_passkeys_allowed_devices:
+        - attested_passkeys_allowed_devices
+        - attested_passkeys_allowed_devices
+        sshkeys:
+          key: ""
+        sshkeys_state: null
+        unixcred_state: null
+        spn: spn
+        ext_cred_portal: None
+        attested_passkeys:
+        - tag: tag
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - tag: tag
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        attested_passkeys_state: null
+        displayname: displayname
+        primary_state: Modifiable
+        unixcred: ""
+        passkeys_state: null
+        mfaregstate: None
+        primary: ""
+      properties:
+        spn:
+          type: string
+        displayname:
+          type: string
+        ext_cred_portal:
+          $ref: "#/components/schemas/CUExtPortal"
+        mfaregstate:
+          $ref: "#/components/schemas/CURegState"
+        can_commit:
+          type: boolean
+        warnings:
+          items:
+            $ref: "#/components/schemas/CURegWarning"
+          type: array
+        primary:
+          allOf:
+          - $ref: "#/components/schemas/CredentialDetail"
+          nullable: true
+        primary_state:
+          $ref: "#/components/schemas/CUCredState"
+        passkeys:
+          items:
+            $ref: "#/components/schemas/PasskeyDetail"
+          type: array
+        passkeys_state:
+          $ref: "#/components/schemas/CUCredState"
+        attested_passkeys:
+          items:
+            $ref: "#/components/schemas/PasskeyDetail"
+          type: array
+        attested_passkeys_state:
+          $ref: "#/components/schemas/CUCredState"
+        attested_passkeys_allowed_devices:
+          items:
+            type: string
+          type: array
+        unixcred:
+          allOf:
+          - $ref: "#/components/schemas/CredentialDetail"
+          nullable: true
+        unixcred_state:
+          $ref: "#/components/schemas/CUCredState"
+        sshkeys:
+          additionalProperties: {}
+        sshkeys_state:
+          $ref: "#/components/schemas/CUCredState"
+      required:
+      - attested_passkeys
+      - attested_passkeys_allowed_devices
+      - attested_passkeys_state
+      - can_commit
+      - displayname
+      - ext_cred_portal
+      - mfaregstate
+      - passkeys
+      - passkeys_state
+      - primary_state
+      - spn
+      - sshkeys
+      - sshkeys_state
+      - unixcred_state
+      - warnings
+    ConsistencyError:
+      oneOf:
+      - enum:
+        - unknown
+        type: string
+      - $ref: "#/components/schemas/ConsistencyError_oneOf"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_1"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_2"
+      - enum:
+        - queryserversearchfailure
+        type: string
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_3"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_4"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_5"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_6"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_7"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_8"
+      - enum:
+        - duplicateuniqueattribute
+        type: string
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_9"
+      - enum:
+        - sqliteintegrityfailure
+        type: string
+      - enum:
+        - backendallidssync
+        type: string
+      - enum:
+        - backendindexsync
+        type: string
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_10"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_11"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_12"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_13"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_14"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_15"
+      - $ref: "#/components/schemas/ConsistencyError_oneOf_16"
+    CreateRequest:
+      example:
+        entries:
+        - attrs:
+            key:
+            - attrs
+            - attrs
+        - attrs:
+            key:
+            - attrs
+            - attrs
+      properties:
+        entries:
+          items:
+            $ref: "#/components/schemas/Entry"
+          type: array
+      required:
+      - entries
+    CreationChallengeResponse:
+      type: object
+    CredentialDetail:
+      properties:
+        uuid:
+          format: uuid
+          type: string
+        type_:
+          $ref: "#/components/schemas/CredentialDetailType"
+      required:
+      - type_
+      - uuid
+    CredentialDetailType:
+      oneOf:
+      - enum:
+        - Password
+        type: string
+      - enum:
+        - GeneratedPassword
+        type: string
+      - $ref: "#/components/schemas/CredentialDetailType_oneOf"
+      - $ref: "#/components/schemas/CredentialDetailType_oneOf_1"
+    CredentialStatus:
+      properties:
+        creds:
+          items:
+            $ref: "#/components/schemas/CredentialDetail"
+          type: array
+      required:
+      - creds
+    DeleteRequest:
+      example:
+        filter:
+          eq:
+          - eq
+          - eq
+      properties:
+        filter:
+          $ref: "#/components/schemas/Filter"
+      required:
+      - filter
+    Entry:
+      description: A limited view of an entry in Kanidm.
+      example:
+        attrs:
+          key:
+          - attrs
+          - attrs
+      properties:
+        attrs:
+          additionalProperties:
+            items:
+              type: string
+      required:
+      - attrs
+    Filter:
+      oneOf:
+      - $ref: "#/components/schemas/Filter_oneOf"
+      - $ref: "#/components/schemas/Filter_oneOf_1"
+      - $ref: "#/components/schemas/Filter_oneOf_2"
+      - $ref: "#/components/schemas/Filter_oneOf_3"
+      - $ref: "#/components/schemas/Filter_oneOf_4"
+      - $ref: "#/components/schemas/Filter_oneOf_5"
+      - enum:
+        - self
+        type: string
+    Group:
+      example:
+        spn: spn
+        uuid: uuid
+      properties:
+        spn:
+          type: string
+        uuid:
+          type: string
+      required:
+      - spn
+      - uuid
+    GroupUnixExtend:
+      description: Request addition of unix attributes to a group.
+      example:
+        gidnumber: 0
+      properties:
+        gidnumber:
+          format: int32
+          minimum: 0
+          nullable: true
+          type: integer
+    IdentifyUserRequest:
+      oneOf:
+      - enum:
+        - Start
+        type: string
+      - $ref: "#/components/schemas/IdentifyUserRequest_oneOf"
+      - enum:
+        - DisplayCode
+        type: string
+    IdentifyUserResponse:
+      oneOf:
+      - enum:
+        - IdentityVerificationUnavailable
+        type: string
+      - enum:
+        - IdentityVerificationAvailable
+        type: string
+      - $ref: "#/components/schemas/IdentifyUserResponse_oneOf"
+      - enum:
+        - WaitForCode
+        type: string
+      - enum:
+        - Success
+        type: string
+      - enum:
+        - CodeFailure
+        type: string
+    Jwk:
+      type: object
+    KeyType:
+      properties:
+        name:
+          type: string
+        short_name:
+          type: string
+        is_cert:
+          type: boolean
+        is_sk:
+          type: boolean
+        kind:
+          type: string
+        plain:
+          type: string
+      required:
+      - is_cert
+      - is_sk
+      - kind
+      - name
+      - plain
+      - short_name
+    KeyTypeKind:
+      type: string
+    Modify:
+      oneOf:
+      - $ref: "#/components/schemas/Modify_oneOf"
+      - $ref: "#/components/schemas/Modify_oneOf_1"
+      - $ref: "#/components/schemas/Modify_oneOf_2"
+    ModifyList:
+      example:
+        mods:
+        - present:
+          - present
+          - present
+        - present:
+          - present
+          - present
+      properties:
+        mods:
+          items:
+            $ref: "#/components/schemas/Modify"
+          type: array
+      required:
+      - mods
+    ModifyRequest:
+      example:
+        filter:
+          eq:
+          - eq
+          - eq
+        modlist:
+          mods:
+          - present:
+            - present
+            - present
+          - present:
+            - present
+            - present
+      properties:
+        filter:
+          $ref: "#/components/schemas/Filter"
+        modlist:
+          $ref: "#/components/schemas/ModifyList"
+      required:
+      - filter
+      - modlist
+    Oauth2ClaimMapJoin:
+      enum:
+      - csv
+      - ssv
+      - array
+      type: string
+    OperationError:
+      oneOf:
+      - enum:
+        - sessionexpired
+        type: string
+      - enum:
+        - duplicatekey
+        type: string
+      - enum:
+        - duplicatelabel
+        type: string
+      - enum:
+        - emptyrequest
+        type: string
+      - enum:
+        - backend
+        type: string
+      - enum:
+        - nomatchingentries
+        type: string
+      - enum:
+        - nomatchingattributes
+        type: string
+      - enum:
+        - uniqueconstraintviolation
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf"
+      - $ref: "#/components/schemas/OperationError_oneOf_1"
+      - $ref: "#/components/schemas/OperationError_oneOf_2"
+      - $ref: "#/components/schemas/OperationError_oneOf_3"
+      - $ref: "#/components/schemas/OperationError_oneOf_4"
+      - enum:
+        - filtergeneration
+        type: string
+      - enum:
+        - filterparseerror
+        type: string
+      - enum:
+        - filteruuidresolution
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf_5"
+      - $ref: "#/components/schemas/OperationError_oneOf_6"
+      - enum:
+        - invalidlabel
+        type: string
+      - enum:
+        - invaliddbstate
+        type: string
+      - enum:
+        - invalidcachestate
+        type: string
+      - enum:
+        - invalidvaluestate
+        type: string
+      - enum:
+        - invalidentryid
+        type: string
+      - enum:
+        - invalidrequeststate
+        type: string
+      - enum:
+        - invalidsyncstate
+        type: string
+      - enum:
+        - invalidstate
+        type: string
+      - enum:
+        - invalidentrystate
+        type: string
+      - enum:
+        - invaliduuid
+        type: string
+      - enum:
+        - invalidreplchangeid
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf_7"
+      - $ref: "#/components/schemas/OperationError_oneOf_8"
+      - $ref: "#/components/schemas/OperationError_oneOf_9"
+      - $ref: "#/components/schemas/OperationError_oneOf_10"
+      - $ref: "#/components/schemas/OperationError_oneOf_11"
+      - $ref: "#/components/schemas/OperationError_oneOf_12"
+      - enum:
+        - missingentries
+        type: string
+      - enum:
+        - modifyassertionfailed
+        type: string
+      - enum:
+        - backendengine
+        type: string
+      - enum:
+        - sqliteerror
+        type: string
+      - enum:
+        - fserror
+        type: string
+      - enum:
+        - serdejsonerror
+        type: string
+      - enum:
+        - serdecborerror
+        type: string
+      - enum:
+        - accessdenied
+        type: string
+      - enum:
+        - notauthenticated
+        type: string
+      - enum:
+        - notauthorised
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf_13"
+      - enum:
+        - invalidsessionstate
+        type: string
+      - enum:
+        - systemprotectedobject
+        type: string
+      - enum:
+        - systemprotectedattribute
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf_14"
+      - enum:
+        - cryptographyerror
+        type: string
+      - enum:
+        - resourcelimit
+        type: string
+      - enum:
+        - queuedisconnected
+        type: string
+      - enum:
+        - webauthn
+        type: string
+      - $ref: "#/components/schemas/OperationError_oneOf_15"
+      - enum:
+        - replreplayfailure
+        type: string
+      - enum:
+        - replentrynotchanged
+        type: string
+      - enum:
+        - replinvalidruvstate
+        type: string
+      - enum:
+        - repldomainlevelunsatisfiable
+        type: string
+      - enum:
+        - repldomainuuidmismatch
+        type: string
+      - enum:
+        - replserveruuidsplitdatastate
+        type: string
+      - enum:
+        - transactionalreadycommitted
+        type: string
+      - enum:
+        - cannotstartmfaduringongoingmfasession
+        type: string
+      - description: |-
+          when you ask for a gid that overlaps a system reserved range
+          When a name is denied by the system config
+        enum:
+        - valuedenyname
+        type: string
+      - description: |-
+          When the DB is potentially over-loaded a timeout can occur starting
+          your operation.
+        enum:
+        - databaselockacquisitiontimeout
+        type: string
+      - description: Your change would introduce a reference loop
+        enum:
+        - referenceloop
+        type: string
+      - description: This session is not able to re-authenticate and has static privileges
+        enum:
+        - sessionmaynotreauth
+        type: string
+      - enum:
+        - au0001invalidstate
+        type: string
+      - enum:
+        - au0002jwsserialisation
+        type: string
+      - enum:
+        - au0003jwssignature
+        type: string
+      - enum:
+        - au0004userauthtokeninvalid
+        type: string
+      - enum:
+        - au0005delayedprocessfailure
+        type: string
+      - enum:
+        - au0006credentialmaynotreauthenticate
+        type: string
+      - enum:
+        - au0007userauthtokeninvalid
+        type: string
+      - enum:
+        - au0008clientauthinfoprevalidation
+        type: string
+      - enum:
+        - kg001tasktimeout
+        type: string
+      - enum:
+        - kg002taskcommfailure
+        type: string
+      - enum:
+        - kg003cacheclearfailed
+        type: string
+      - enum:
+        - kg004unknownfeatureuuid
+        type: string
+      - enum:
+        - kg005howdidyouevenmanagethis
+        type: string
+      - enum:
+        - kg006datastructurecorruption
+        type: string
+      - enum:
+        - cu0001webauthnattestationnottrusted
+        type: string
+      - enum:
+        - cu0002webauthnregistrationerror
+        type: string
+      - enum:
+        - cu0003webauthnusernotverified
+        type: string
+      - enum:
+        - cu0004sessioninconsistent
+        type: string
+      - enum:
+        - cu0005intenttokenconflict
+        type: string
+      - enum:
+        - cu0006intenttokeninvalidated
+        type: string
+      - enum:
+        - cu0007accountemailnotfound
+        type: string
+      - enum:
+        - cu0008accountmissingemail
+        type: string
+      - enum:
+        - cu0009accountemailnotfound
+        type: string
+      - enum:
+        - cu0010accountrecoverydisabled
+        type: string
+      - enum:
+        - vs0001incomingreplsshpublickey
+        type: string
+      - enum:
+        - vs0002certificatepublickeydigest
+        type: string
+      - enum:
+        - vs0003certificatederdecode
+        type: string
+      - enum:
+        - vs0004certificatepublickeydigest
+        type: string
+      - enum:
+        - vs0005certificatepublickeydigest
+        type: string
+      - enum:
+        - vl0001valuesshpublickeystring
+        type: string
+      - enum:
+        - ld0001anonymousnotallowed
+        type: string
+      - enum:
+        - db0001mismatchedrestoreversion
+        type: string
+      - enum:
+        - db0002mismatchedrestoreversion
+        type: string
+      - enum:
+        - db0003filterresolvecachebuild
+        type: string
+      - enum:
+        - db0004databasetooold
+        type: string
+      - enum:
+        - sc0001incomingsshpublickey
+        type: string
+      - enum:
+        - sc0002referencesyntaxinvalid
+        type: string
+      - enum:
+        - sc0003mailsyntaxinvalid
+        type: string
+      - enum:
+        - sc0004uuidsyntaxinvalid
+        type: string
+      - enum:
+        - sc0005boolsyntaxinvalid
+        type: string
+      - enum:
+        - sc0006uint32syntaxinvalid
+        type: string
+      - enum:
+        - sc0007urlsyntaxinvalid
+        type: string
+      - enum:
+        - sc0008syntaxtypesyntaxinvalid
+        type: string
+      - enum:
+        - sc0009indextypesyntaxinvalid
+        type: string
+      - enum:
+        - sc0010datetimesyntaxinvalid
+        type: string
+      - enum:
+        - sc0011addresssyntaxinvalid
+        type: string
+      - enum:
+        - sc0012certificatesyntaxinvalid
+        type: string
+      - enum:
+        - sc0013certificateinvalidder
+        type: string
+      - enum:
+        - sc0014certificateinvaliddigest
+        type: string
+      - enum:
+        - sc0015credentialtypesyntaxinvalid
+        type: string
+      - enum:
+        - sc0016inamesyntaxinvalid
+        type: string
+      - enum:
+        - sc0017iutf8syntaxinvalid
+        type: string
+      - enum:
+        - sc0018nsuniqueidsyntaxinvalid
+        type: string
+      - enum:
+        - sc0019oauth2scopesyntaxinvalid
+        type: string
+      - enum:
+        - sc0020oauth2scopemapsyntaxinvalid
+        type: string
+      - enum:
+        - sc0021oauth2scopemapmissinggroupidentifier
+        type: string
+      - enum:
+        - sc0022oauth2claimmapsyntaxinvalid
+        type: string
+      - enum:
+        - sc0023oauth2claimmapmissinggroupidentifier
+        type: string
+      - enum:
+        - sc0024sshpublickeysyntaxinvalid
+        type: string
+      - enum:
+        - sc0025uihintsyntaxinvalid
+        type: string
+      - enum:
+        - sc0026utf8syntaxinvalid
+        type: string
+      - enum:
+        - sc0027classsetinvalid
+        type: string
+      - enum:
+        - sc0028createduuidsinvalid
+        type: string
+      - enum:
+        - sc0029paginationoutofbounds
+        type: string
+      - enum:
+        - sc0030sha256syntaxinvalid
+        type: string
+      - enum:
+        - sc0031int64syntaxinvalid
+        type: string
+      - enum:
+        - sc0032uint64syntaxinvalid
+        type: string
+      - enum:
+        - sc0033assertioncontainsduplicateuuids
+        type: string
+      - enum:
+        - mg0001invalidremigrationlevel
+        type: string
+      - enum:
+        - mg0002raisedomainlevelexceedsmaximum
+        type: string
+      - enum:
+        - mg0003serverphaseinvalidformigration
+        type: string
+      - enum:
+        - mg0004domainlevelindevelopment
+        type: string
+      - enum:
+        - mg0005gidconstraintsnotmet
+        type: string
+      - enum:
+        - mg0006skconstraintsnotmet
+        type: string
+      - enum:
+        - mg0007oauth2strictconstraintsnotmet
+        type: string
+      - enum:
+        - mg0008skipupgradeattempted
+        type: string
+      - enum:
+        - mg0009invalidtargetlevelforbootstrap
+        type: string
+      - enum:
+        - mg0010downgradenotallowed
+        type: string
+      - enum:
+        - kp0001keyprovidernotloaded
+        type: string
+      - enum:
+        - kp0002keyproviderinvalidclass
+        type: string
+      - enum:
+        - kp0003keyproviderinvalidtype
+        type: string
+      - enum:
+        - kp0004keyprovidermissingattributename
+        type: string
+      - enum:
+        - kp0005keyproviderduplicate
+        type: string
+      - enum:
+        - kp0006keyobjectjwtes256generation
+        type: string
+      - enum:
+        - kp0007keyproviderdefaultnotavailable
+        type: string
+      - enum:
+        - kp0008keyobjectmissinguuid
+        type: string
+      - enum:
+        - kp0009keyobjectprivatetoder
+        type: string
+      - enum:
+        - kp0010keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0011keyobjectmissingclass
+        type: string
+      - enum:
+        - kp0012keyobjectmissingprovider
+        type: string
+      - enum:
+        - kp0012keyprovidernotloaded
+        type: string
+      - enum:
+        - kp0013keyobjectjwses256derinvalid
+        type: string
+      - enum:
+        - kp0014keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0015keyobjectjwses256derinvalid
+        type: string
+      - enum:
+        - kp0016keyobjectjwses256derinvalid
+        type: string
+      - enum:
+        - kp0017keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0018keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0019keyproviderunsupportedalgorithm
+        type: string
+      - enum:
+        - kp0020keyobjectnoactivesigningkeys
+        type: string
+      - enum:
+        - kp0021keyobjectjwses256signature
+        type: string
+      - enum:
+        - kp0022keyobjectjwsnotassociated
+        type: string
+      - enum:
+        - kp0023keyobjectjwskeyrevoked
+        type: string
+      - enum:
+        - kp0024keyobjectjwsinvalid
+        type: string
+      - enum:
+        - kp0025keyprovidernotavailable
+        type: string
+      - enum:
+        - kp0026keyobjectnosuchkey
+        type: string
+      - enum:
+        - kp0027keyobjectpublictoder
+        type: string
+      - enum:
+        - kp0028keyobjectimportjwses256derinvalid
+        type: string
+      - enum:
+        - kp0029keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0030keyobjectpublictoder
+        type: string
+      - enum:
+        - kp0031keyobjectnotfound
+        type: string
+      - enum:
+        - kp0032keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0033keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0034keyproviderunsupportedalgorithm
+        type: string
+      - enum:
+        - kp0035keyobjectjwea128gcmgeneration
+        type: string
+      - enum:
+        - kp0036keyobjectprivatetobytes
+        type: string
+      - enum:
+        - kp0037keyobjectimportjwea128gcminvalid
+        type: string
+      - enum:
+        - kp0038keyobjectimportjwea128gcminvalid
+        type: string
+      - enum:
+        - kp0039keyobjectjwenotassociated
+        type: string
+      - enum:
+        - kp0040keyobjectjweinvalid
+        type: string
+      - enum:
+        - kp0041keyobjectjwerevoked
+        type: string
+      - enum:
+        - kp0042keyobjectnoactiveencryptionkeys
+        type: string
+      - enum:
+        - kp0043keyobjectjwea128gcmencryption
+        type: string
+      - enum:
+        - kp0044keyobjectjwspublicjwk
+        type: string
+      - enum:
+        - kp0045keyobjectimportjwsrs256derinvalid
+        type: string
+      - enum:
+        - kp0046keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0047keyobjectpublictoder
+        type: string
+      - enum:
+        - kp0048keyobjectjwtrs256generation
+        type: string
+      - enum:
+        - kp0049keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0050keyobjectprivatetoder
+        type: string
+      - enum:
+        - kp0051keyobjectpublictoder
+        type: string
+      - enum:
+        - kp0052keyobjectjwsrs256derinvalid
+        type: string
+      - enum:
+        - kp0053keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0054keyobjectjwsrs256derinvalid
+        type: string
+      - enum:
+        - kp0055keyobjectjwsrs256derinvalid
+        type: string
+      - enum:
+        - kp0056keyobjectjwsrs256signature
+        type: string
+      - enum:
+        - kp0057keyobjectjwsnotassociated
+        type: string
+      - enum:
+        - kp0058keyobjectjwsinvalid
+        type: string
+      - enum:
+        - kp0059keyobjectjwskeyrevoked
+        type: string
+      - enum:
+        - kp0060keyobjectjwspublicjwk
+        type: string
+      - enum:
+        - kp0061keyobjectnoactivesigningkeys
+        type: string
+      - enum:
+        - kp0062keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0063keyobjectjwshs256derinvalid
+        type: string
+      - enum:
+        - kp0064keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0065keyobjectjwths256generation
+        type: string
+      - enum:
+        - kp0066keyobjectjwshs256derinvalid
+        type: string
+      - enum:
+        - kp0067keyobjectsignertoverifier
+        type: string
+      - enum:
+        - kp0068keyobjectjwshs256derinvalid
+        type: string
+      - enum:
+        - kp0069keyobjectnoactivesigningkeys
+        type: string
+      - enum:
+        - kp0070keyobjectjwshs256signature
+        type: string
+      - enum:
+        - kp0071keyobjectprivatetoder
+        type: string
+      - enum:
+        - kp0072keyobjecths256invalid
+        type: string
+      - enum:
+        - kp0073keyobjecths256invalid
+        type: string
+      - enum:
+        - kp0074keyobjectnoactivesigningkeys
+        type: string
+      - enum:
+        - kp0075keyobjecthmacinvalidlength
+        type: string
+      - enum:
+        - kp0076keyobjecthkdfoutputlengthinvalid
+        type: string
+      - enum:
+        - kp0077keyprovidernosuchkey
+        type: string
+      - enum:
+        - kp0078keyobjectnotfound
+        type: string
+      - enum:
+        - kp0079keyobjectnotfound
+        type: string
+      - enum:
+        - kp0080keyprovidernosuchkey
+        type: string
+      - enum:
+        - pl0001gidoverlapssystemrange
+        type: string
+      - enum:
+        - ui0001challengeserialisation
+        type: string
+      - enum:
+        - ui0002invalidstate
+        type: string
+      - enum:
+        - ui0003invalidoauth2resume
+        type: string
+      - enum:
+        - ui0004memberalreadyexists
+        type: string
+      - enum:
+        - ku001initwhilesessionactive
+        type: string
+      - enum:
+        - ku002continuewhilesessioninactive
+        type: string
+      - enum:
+        - ku003pamauthfailed
+        type: string
+      - enum:
+        - ku004paminitfailed
+        type: string
+      - enum:
+        - ku005errorcheckingaccount
+        type: string
+      - enum:
+        - ku006onlyrootallowed
+        type: string
+    PasskeyDetail:
+      example:
+        tag: tag
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        uuid:
+          format: uuid
+          type: string
+        tag:
+          type: string
+      required:
+      - tag
+      - uuid
+    PasswordFeedback:
+      oneOf:
+      - enum:
+        - useafewwordsavoidcommonphrases
+        type: string
+      - enum:
+        - noneedforsymbolsdigitsoruppercaseletters
+        type: string
+      - enum:
+        - addanotherwordortwo
+        type: string
+      - enum:
+        - capitalizationdoesnthelpverymuch
+        type: string
+      - enum:
+        - alluppercaseisalmostaseasytoguessasalllowercase
+        type: string
+      - enum:
+        - reversedwordsarentmuchhardertoguess
+        type: string
+      - enum:
+        - predictablesubstitutionsdonthelpverymuch
+        type: string
+      - enum:
+        - usealongerkeyboardpatternwithmoreturns
+        type: string
+      - enum:
+        - avoidrepeatedwordsandcharacters
+        type: string
+      - enum:
+        - avoidsequences
+        type: string
+      - enum:
+        - avoidrecentyears
+        type: string
+      - enum:
+        - avoidyearsthatareassociatedwithyou
+        type: string
+      - enum:
+        - avoiddatesandyearsthatareassociatedwithyou
+        type: string
+      - enum:
+        - straightrowsofkeysareeasytoguess
+        type: string
+      - enum:
+        - shortkeyboardpatternsareeasytoguess
+        type: string
+      - enum:
+        - repeatslikeaaaareeasytoguess
+        type: string
+      - enum:
+        - repeatslikeabcabcareonlyslightlyhardertoguess
+        type: string
+      - enum:
+        - thisisatop10password
+        type: string
+      - enum:
+        - thisisatop100password
+        type: string
+      - enum:
+        - thisisacommonpassword
+        type: string
+      - enum:
+        - thisissimilartoacommonlyusedpassword
+        type: string
+      - enum:
+        - sequenceslikeabcareeasytoguess
+        type: string
+      - enum:
+        - recentyearsareeasytoguess
+        type: string
+      - enum:
+        - awordbyitselfiseasytoguess
+        type: string
+      - enum:
+        - datesareofteneasytoguess
+        type: string
+      - enum:
+        - namesandsurnamesbythemselvesareeasytoguess
+        type: string
+      - enum:
+        - commonnamesandsurnamesareeasytoguess
+        type: string
+      - $ref: "#/components/schemas/PasswordFeedback_oneOf"
+      - enum:
+        - badlisted
+        type: string
+      - enum:
+        - dontreusepasswords
+        type: string
+    PluginError:
+      oneOf:
+      - $ref: "#/components/schemas/PluginError_oneOf"
+      - $ref: "#/components/schemas/PluginError_oneOf_1"
+      - $ref: "#/components/schemas/PluginError_oneOf_2"
+      - enum:
+        - oauth2secrets
+        type: string
+    ProtoEntry:
+      properties:
+        attrs:
+          additionalProperties:
+            items:
+              type: string
+      required:
+      - attrs
+    PublicKeyCredential:
+      type: object
+    PublicKeyKind:
+      type: string
+    RadiusAuthToken:
+      example:
+        displayname: displayname
+        name: name
+        groups:
+        - spn: spn
+          uuid: uuid
+        - spn: spn
+          uuid: uuid
+        secret: secret
+        uuid: uuid
+      properties:
+        name:
+          type: string
+        displayname:
+          type: string
+        uuid:
+          type: string
+        secret:
+          type: string
+        groups:
+          items:
+            $ref: "#/components/schemas/Group"
+          type: array
+      required:
+      - displayname
+      - groups
+      - name
+      - secret
+      - uuid
+    RequestChallengeResponse:
+      type: object
+    Result:
+      type: object
+    SchemaError:
+      oneOf:
+      - enum:
+        - notimplemented
+        type: string
+      - enum:
+        - noclassfound
+        type: string
+      - $ref: "#/components/schemas/SchemaError_oneOf"
+      - $ref: "#/components/schemas/SchemaError_oneOf_1"
+      - $ref: "#/components/schemas/OperationError_oneOf_6"
+      - $ref: "#/components/schemas/SchemaError_oneOf_2"
+      - $ref: "#/components/schemas/SchemaError_oneOf_3"
+      - $ref: "#/components/schemas/SchemaError_oneOf_4"
+      - $ref: "#/components/schemas/SchemaError_oneOf_5"
+      - enum:
+        - emptyfilter
+        type: string
+      - enum:
+        - corrupted
+        type: string
+      - $ref: "#/components/schemas/SchemaError_oneOf_6"
+    SchemaJwk:
+      additionalProperties:
+        type: string
+      description: Used entirely to trick Utoipa into generating the correct schema
+        for JWK
+    ScimApplicationPassword:
+      example:
+        label: label
+        secret: secret
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        uuid:
+          format: uuid
+          type: string
+        label:
+          type: string
+        secret:
+          type: string
+      required:
+      - label
+      - secret
+      - uuid
+    ScimApplicationPasswordCreate:
+      example:
+        applicationUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        label: label
+      properties:
+        applicationUuid:
+          format: uuid
+          type: string
+        label:
+          type: string
+      required:
+      - applicationUuid
+      - label
+    ScimAttr:
+      oneOf:
+      - type: boolean
+      - format: int64
+        type: integer
+      - format: double
+        type: number
+      - type: string
+      - format: date-time
+        type: string
+      - format: uri
+        type: string
+    ScimComplexAttr:
+      type: object
+    ScimEntry:
+      additionalProperties:
+        $ref: "#/components/schemas/ScimValue"
+      example:
+        meta: ""
+        schemas:
+        - schemas
+        - schemas
+        externalId: externalId
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+        id:
+          format: uuid
+          type: string
+        externalId:
+          nullable: true
+          type: string
+        meta:
+          allOf:
+          - $ref: "#/components/schemas/ScimMeta"
+          nullable: true
+      required:
+      - id
+      - schemas
+    ScimEntryGetQuery:
+      description: SCIM Query Parameters used during the get of a single entry
+      properties:
+        attributes:
+          items:
+            $ref: "#/components/schemas/Attribute"
+          nullable: true
+          type: array
+        extAccessCheck:
+          type: boolean
+        sortBy:
+          allOf:
+          - $ref: "#/components/schemas/Attribute"
+          nullable: true
+        sortOrder:
+          allOf:
+          - $ref: "#/components/schemas/ScimSortOrder"
+          nullable: true
+        startIndex:
+          format: int64
+          minimum: 0
+          type: integer
+        count:
+          format: int64
+          minimum: 0
+          type: integer
+        filter: {}
+    ScimEntryPostGeneric:
+      allOf:
+      - description: Create an attribute to contain the following value state.
+        type: object
+      example: {}
+    ScimEntryPutGeneric:
+      allOf:
+      - allOf:
+        - $ref: "#/components/schemas/ScimEntryGetQuery"
+        description: |-
+          Non-standard extension - allow query options to be set in a put request. This
+          is because a put request also returns the entry state post put, so we want
+          to allow putters to adjust and control what is returned here.
+      - additionalProperties:
+          description: |-
+            Update an attribute to contain the following value state.
+            If the attribute is None, it is removed.
+        properties:
+          id:
+            format: uuid
+            type: string
+        required:
+        - id
+      example:
+        filter: ""
+        startIndex: 0
+        sortOrder: ""
+        extAccessCheck: true
+        count: 0
+        attributes:
+        - account
+        - account
+        sortBy: ""
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+    ScimListResponse:
+      additionalProperties: false
+      example:
+        totalResults: 0
+        startIndex: 0
+        itemsPerPage: 0
+        schemas:
+        - schemas
+        - schemas
+        resources:
+        - meta: ""
+          schemas:
+          - schemas
+          - schemas
+          externalId: externalId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - meta: ""
+          schemas:
+          - schemas
+          - schemas
+          externalId: externalId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        schemas:
+          items:
+            type: string
+          type: array
+        totalResults:
+          format: int64
+          minimum: 0
+          type: integer
+        itemsPerPage:
+          format: int64
+          minimum: 0
+          type: integer
+        startIndex:
+          format: int64
+          minimum: 0
+          type: integer
+        resources:
+          items:
+            $ref: "#/components/schemas/ScimEntry"
+          type: array
+      required:
+      - resources
+      - schemas
+      - totalResults
+    ScimMeta:
+      additionalProperties: false
+      properties:
+        resourceType:
+          type: string
+        created:
+          format: date-time
+          type: string
+        lastModified:
+          format: date-time
+          type: string
+        location:
+          format: uri
+          type: string
+        version:
+          type: string
+      required:
+      - created
+      - lastModified
+      - location
+      - resourceType
+      - version
+    ScimSortOrder:
+      enum:
+      - ascending
+      - descending
+      type: string
+    ScimSyncRequest:
+      example:
+        from_state: Refresh
+        entries:
+        - meta: ""
+          schemas:
+          - schemas
+          - schemas
+          externalId: externalId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - meta: ""
+          schemas:
+          - schemas
+          - schemas
+          externalId: externalId
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        retain: Ignore
+        to_state: null
+      properties:
+        from_state:
+          $ref: "#/components/schemas/ScimSyncState"
+        to_state:
+          $ref: "#/components/schemas/ScimSyncState"
+        entries:
+          items:
+            $ref: "#/components/schemas/ScimEntry"
+          type: array
+        retain:
+          $ref: "#/components/schemas/ScimSyncRetentionMode"
+      required:
+      - entries
+      - from_state
+      - retain
+      - to_state
+    ScimSyncRetentionMode:
+      oneOf:
+      - description: |-
+          No actions are to be taken - only update or create entries in the
+          entries set.
+        enum:
+        - Ignore
+        type: string
+      - $ref: "#/components/schemas/ScimSyncRetentionMode_oneOf"
+      - $ref: "#/components/schemas/ScimSyncRetentionMode_oneOf_1"
+    ScimSyncState:
+      oneOf:
+      - enum:
+        - Refresh
+        type: string
+      - $ref: "#/components/schemas/ScimSyncState_oneOf"
+    ScimValue:
+      oneOf:
+      - $ref: "#/components/schemas/ScimAttr"
+      - $ref: "#/components/schemas/BTreeMap"
+      - items:
+          $ref: "#/components/schemas/ScimAttr"
+        type: array
+      - items:
+          $ref: "#/components/schemas/BTreeMap"
+        type: array
+    SearchRequest:
+      example:
+        filter:
+          eq:
+          - eq
+          - eq
+      properties:
+        filter:
+          $ref: "#/components/schemas/Filter"
+      required:
+      - filter
+    SearchResponse:
+      example:
+        entries:
+        - attrs:
+            key:
+            - attrs
+            - attrs
+        - attrs:
+            key:
+            - attrs
+            - attrs
+      properties:
+        entries:
+          items:
+            $ref: "#/components/schemas/Entry"
+          type: array
+      required:
+      - entries
+    SingleStringRequest:
+      example:
+        value: value
+      properties:
+        value:
+          type: string
+      required:
+      - value
+    SshPublicKey:
+      properties:
+        key_type:
+          type: string
+        kind:
+          type: string
+        comment:
+          nullable: true
+          type: string
+      required:
+      - key_type
+      - kind
+    TotpAlgo:
+      enum:
+      - sha1
+      - sha256
+      - sha512
+      type: string
+    TotpSecret:
+      properties:
+        accountname:
+          type: string
+        issuer:
+          description: "User-facing name of the system, issuer of the TOTP"
+          type: string
+        secret:
+          items:
+            format: int32
+            minimum: 0
+            type: integer
+          type: array
+        algo:
+          $ref: "#/components/schemas/TotpAlgo"
+        step:
+          format: int64
+          minimum: 0
+          type: integer
+        digits:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - accountname
+      - algo
+      - digits
+      - issuer
+      - secret
+      - step
+    UatPurpose:
+      oneOf:
+      - enum:
+        - readonly
+        type: string
+      - $ref: "#/components/schemas/UatPurpose_oneOf"
+    UatPurposeStatus:
+      description: |-
+        The current purpose of a User Auth Token. It may be read-only, read-write
+        or privilege capable (able to step up to read-write after re-authentication).
+      enum:
+      - readonly
+      - readwrite
+      - privilegecapable
+      type: string
+    UatStatus:
+      description: The status of a User Auth Token
+      properties:
+        account_id:
+          format: uuid
+          type: string
+        session_id:
+          format: uuid
+          type: string
+        state:
+          $ref: "#/components/schemas/UatStatusState"
+        issued_at:
+          format: date-time
+          type: string
+        purpose:
+          $ref: "#/components/schemas/UatPurposeStatus"
+      required:
+      - account_id
+      - issued_at
+      - purpose
+      - session_id
+      - state
+    UatStatusState:
+      description: The expiry of the User Auth Token.
+      oneOf:
+      - $ref: "#/components/schemas/UatStatusState_oneOf"
+      - enum:
+        - neverexpires
+        type: string
+      - enum:
+        - revoked
+        type: string
+    UiHint:
+      enum:
+      - experimentalfeatures
+      - posixaccount
+      - credentialupdate
+      - synchronisedaccount
+      type: string
+    UnixGroupToken:
+      description: A token representing the details of a unix group
+      example:
+        spn: spn
+        gidnumber: 0
+        name: name
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        spn:
+          type: string
+        uuid:
+          format: uuid
+          type: string
+        gidnumber:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - gidnumber
+      - name
+      - spn
+      - uuid
+    UnixUserToken:
+      description: A token representing the details of a unix user
+      example:
+        spn: spn
+        valid: true
+        shell: shell
+        displayname: displayname
+        gidnumber: 0
+        name: name
+        groups:
+        - spn: spn
+          gidnumber: 0
+          name: name
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        - spn: spn
+          gidnumber: 0
+          name: name
+          uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        sshkeys:
+        - sshkeys
+        - sshkeys
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        name:
+          type: string
+        spn:
+          type: string
+        displayname:
+          type: string
+        gidnumber:
+          format: int32
+          minimum: 0
+          type: integer
+        uuid:
+          format: uuid
+          type: string
+        shell:
+          nullable: true
+          type: string
+        groups:
+          items:
+            $ref: "#/components/schemas/UnixGroupToken"
+          type: array
+        sshkeys:
+          items:
+            type: string
+          type: array
+        valid:
+          type: boolean
+      required:
+      - displayname
+      - gidnumber
+      - groups
+      - name
+      - spn
+      - sshkeys
+      - uuid
+    UserAuthToken:
+      description: |-
+        The currently authenticated user, and any required metadata for them
+        to properly authorise them. This is similar in nature to oauth and the krb
+        PAC/PAD structures. This information is transparent to clients and CAN
+        be parsed by them!
+
+        This structure and how it works will *very much* change over time from this
+        point onward! This means on updates, that sessions will invalidate in many
+        cases.
+      example:
+        spn: spn
+        purpose: readonly
+        displayname: displayname
+        session_id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        expiry: 2000-01-23T04:56:07.000+00:00
+        limit_search_max_results: 0
+        limit_search_max_filter_test: 0
+        mail_primary: mail_primary
+        issued_at: 2000-01-23T04:56:07.000+00:00
+        uuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        ui_hints:
+        - experimentalfeatures
+        - experimentalfeatures
+      properties:
+        session_id:
+          format: uuid
+          type: string
+        issued_at:
+          format: date-time
+          type: string
+        expiry:
+          description: |-
+            If none, there is no expiry, and this is always valid. If there is
+            an expiry, check that the current time < expiry.
+          format: date-time
+          nullable: true
+          type: string
+        purpose:
+          $ref: "#/components/schemas/UatPurpose"
+        uuid:
+          format: uuid
+          type: string
+        displayname:
+          type: string
+        spn:
+          type: string
+        mail_primary:
+          nullable: true
+          type: string
+        ui_hints:
+          items:
+            $ref: "#/components/schemas/UiHint"
+          type: array
+          uniqueItems: true
+        limit_search_max_results:
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+        limit_search_max_filter_test:
+          format: int64
+          minimum: 0
+          nullable: true
+          type: integer
+      required:
+      - displayname
+      - issued_at
+      - purpose
+      - session_id
+      - spn
+      - ui_hints
+      - uuid
+    Value: {}
+    WebError:
+      description: "The web app's top level error type, this takes an `OperationError`\
+        \ and converts it into a HTTP response."
+      oneOf:
+      - $ref: "#/components/schemas/WebError_oneOf"
+      - $ref: "#/components/schemas/WebError_oneOf_1"
+      - $ref: "#/components/schemas/WebError_oneOf_2"
+    WhoamiResponse:
+      description: A response to a whoami request
+      example:
+        youare:
+          attrs:
+            key:
+            - attrs
+            - attrs
+      properties:
+        youare:
+          $ref: "#/components/schemas/Entry"
+      required:
+      - youare
+    AppLink_Oauth2:
+      example:
+        has_image: true
+        name: name
+        display_name: display_name
+        redirect_url: https://openapi-generator.tech
+      properties:
+        name:
+          type: string
+        display_name:
+          type: string
+        redirect_url:
+          format: uri
+          type: string
+        has_image:
+          type: boolean
+      required:
+      - display_name
+      - has_image
+      - name
+      - redirect_url
+    Attribute_oneOf:
+      properties:
+        custom:
+          type: string
+      required:
+      - custom
+    AuthAllowed_oneOf:
+      properties:
+        securitykey:
+          additionalProperties: {}
+      required:
+      - securitykey
+    AuthAllowed_oneOf_1:
+      properties:
+        passkey:
+          additionalProperties: {}
+      required:
+      - passkey
+    AuthCredential_oneOf:
+      properties:
+        password:
+          type: string
+      required:
+      - password
+    AuthCredential_oneOf_1:
+      properties:
+        totp:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - totp
+    AuthCredential_oneOf_2:
+      properties:
+        backupcode:
+          type: string
+      required:
+      - backupcode
+    AuthCredential_oneOf_3:
+      properties:
+        passkey:
+          type: string
+      required:
+      - passkey
+    AuthState_oneOf:
+      description: You need to select how you want to proceed.
+      example:
+        choose:
+        - anonymous
+        - anonymous
+      properties:
+        choose:
+          description: You need to select how you want to proceed.
+          items:
+            $ref: "#/components/schemas/AuthMech"
+          type: array
+      required:
+      - choose
+    AuthState_oneOf_1:
+      description: "Continue to auth, allowed mechanisms/challenges listed."
+      properties:
+        continue:
+          description: "Continue to auth, allowed mechanisms/challenges listed."
+          items:
+            $ref: "#/components/schemas/AuthAllowed"
+          type: array
+      required:
+      - continue
+    AuthState_oneOf_2:
+      description: "Something was bad, your session is terminated and no cookie."
+      properties:
+        denied:
+          description: "Something was bad, your session is terminated and no cookie."
+          type: string
+      required:
+      - denied
+    AuthState_oneOf_3:
+      description: "Everything is good, your bearer token has been issued and is within."
+      properties:
+        success:
+          description: "Everything is good, your bearer token has been issued and\
+            \ is within."
+          type: string
+      required:
+      - success
+    AuthStep_oneOf:
+      description: Initialise a new authentication session
+      example:
+        init: init
+      properties:
+        init:
+          description: Initialise a new authentication session
+          type: string
+      required:
+      - init
+    AuthStep_oneOf_1_init2:
+      description: |-
+        Initialise a new authentication session with extra flags
+        for requesting different types of session tokens or
+        immediate access to privileges.
+      properties:
+        username:
+          type: string
+        issue:
+          $ref: "#/components/schemas/AuthIssueSession"
+        privileged:
+          description: "If true, the session will have r/w access."
+          type: boolean
+      required:
+      - issue
+      - username
+    AuthStep_oneOf_1:
+      description: |-
+        Initialise a new authentication session with extra flags
+        for requesting different types of session tokens or
+        immediate access to privileges.
+      properties:
+        init2:
+          $ref: "#/components/schemas/AuthStep_oneOf_1_init2"
+      required:
+      - init2
+    AuthStep_oneOf_2:
+      description: Request the named authentication mechanism to proceed
+      properties:
+        begin:
+          allOf:
+          - $ref: "#/components/schemas/AuthMech"
+          description: Request the named authentication mechanism to proceed
+      required:
+      - begin
+    AuthStep_oneOf_3:
+      description: Provide a credential in response to a challenge
+      properties:
+        cred:
+          allOf:
+          - $ref: "#/components/schemas/AuthCredential"
+          description: Provide a credential in response to a challenge
+      required:
+      - cred
+    BTreeMap_value:
+      oneOf:
+      - type: boolean
+      - format: int64
+        type: integer
+      - format: double
+        type: number
+      - type: string
+      - format: date-time
+        type: string
+      - format: uri
+        type: string
+    CUExtPortal_oneOf:
+      properties:
+        Some:
+          format: uri
+          type: string
+      required:
+      - Some
+    CURegState_oneOf:
+      properties:
+        TotpCheck:
+          $ref: "#/components/schemas/TotpSecret"
+      required:
+      - TotpCheck
+    CURegState_oneOf_1:
+      properties:
+        TotpNameTryAgain:
+          type: string
+      required:
+      - TotpNameTryAgain
+    CURegState_oneOf_2:
+      properties:
+        BackupCodes:
+          items:
+            type: string
+          type: array
+      required:
+      - BackupCodes
+    CURegState_oneOf_3:
+      properties:
+        Passkey:
+          additionalProperties: {}
+      required:
+      - Passkey
+    CURegState_oneOf_4:
+      properties:
+        AttestedPasskey:
+          additionalProperties: {}
+      required:
+      - AttestedPasskey
+    ConsistencyError_oneOf:
+      properties:
+        schemaclassmissingattribute:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - schemaclassmissingattribute
+    ConsistencyError_oneOf_1:
+      properties:
+        schemaclassphantomattribute:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - schemaclassphantomattribute
+    ConsistencyError_oneOf_2:
+      properties:
+        schemauuidnotunique:
+          format: uuid
+          type: string
+      required:
+      - schemauuidnotunique
+    ConsistencyError_oneOf_3:
+      properties:
+        entryuuidcorrupt:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - entryuuidcorrupt
+    ConsistencyError_oneOf_4:
+      properties:
+        uuidindexcorrupt:
+          type: string
+      required:
+      - uuidindexcorrupt
+    ConsistencyError_oneOf_5:
+      properties:
+        uuidnotunique:
+          type: string
+      required:
+      - uuidnotunique
+    ConsistencyError_oneOf_6:
+      properties:
+        refintnotupheld:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - refintnotupheld
+    ConsistencyError_oneOf_7:
+      properties:
+        memberofinvalid:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - memberofinvalid
+    ConsistencyError_oneOf_8:
+      properties:
+        invalidattributetype:
+          type: string
+      required:
+      - invalidattributetype
+    ConsistencyError_oneOf_9:
+      properties:
+        invalidspn:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - invalidspn
+    ConsistencyError_oneOf_10:
+      properties:
+        changelogdesynchronised:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - changelogdesynchronised
+    ConsistencyError_oneOf_11:
+      properties:
+        changestatedesynchronised:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - changestatedesynchronised
+    ConsistencyError_oneOf_12:
+      properties:
+        ruvinconsistent:
+          type: string
+      required:
+      - ruvinconsistent
+    ConsistencyError_oneOf_13:
+      properties:
+        deniedname:
+          format: uuid
+          type: string
+      required:
+      - deniedname
+    ConsistencyError_oneOf_14_keyprovideruuidmissing:
+      properties:
+        key_object:
+          format: uuid
+          type: string
+      required:
+      - key_object
+    ConsistencyError_oneOf_14:
+      properties:
+        keyprovideruuidmissing:
+          $ref: "#/components/schemas/ConsistencyError_oneOf_14_keyprovideruuidmissing"
+      required:
+      - keyprovideruuidmissing
+    ConsistencyError_oneOf_15:
+      properties:
+        keyprovidernokeys:
+          $ref: "#/components/schemas/ConsistencyError_oneOf_14_keyprovideruuidmissing"
+      required:
+      - keyprovidernokeys
+    ConsistencyError_oneOf_16_keyprovidernotfound:
+      properties:
+        key_object:
+          format: uuid
+          type: string
+        provider:
+          format: uuid
+          type: string
+      required:
+      - key_object
+      - provider
+    ConsistencyError_oneOf_16:
+      properties:
+        keyprovidernotfound:
+          $ref: "#/components/schemas/ConsistencyError_oneOf_16_keyprovidernotfound"
+      required:
+      - keyprovidernotfound
+    CredentialDetailType_oneOf:
+      properties:
+        Passkey:
+          items:
+            type: string
+          type: array
+      required:
+      - Passkey
+    CredentialDetailType_oneOf_1:
+      description: "totp, webauthn"
+      properties:
+        PasswordMfa:
+          description: "totp, webauthn"
+          items:
+            type: object
+          maxItems: 3
+          minItems: 3
+          type: array
+      required:
+      - PasswordMfa
+    Filter_oneOf:
+      example:
+        eq:
+        - eq
+        - eq
+      properties:
+        eq:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - eq
+    Filter_oneOf_1:
+      properties:
+        cnt:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - cnt
+    Filter_oneOf_2:
+      properties:
+        pres:
+          type: string
+      required:
+      - pres
+    Filter_oneOf_3:
+      properties:
+        or:
+          items:
+            $ref: "#/components/schemas/Filter"
+          type: array
+      required:
+      - or
+    Filter_oneOf_4:
+      properties:
+        and:
+          items:
+            $ref: "#/components/schemas/Filter"
+          type: array
+      required:
+      - and
+    Filter_oneOf_5:
+      properties:
+        andnot:
+          $ref: "#/components/schemas/Filter"
+      required:
+      - andnot
+    IdentifyUserRequest_oneOf_SubmitCode:
+      properties:
+        other_totp:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - other_totp
+    IdentifyUserRequest_oneOf:
+      properties:
+        SubmitCode:
+          $ref: "#/components/schemas/IdentifyUserRequest_oneOf_SubmitCode"
+      required:
+      - SubmitCode
+    IdentifyUserResponse_oneOf_ProvideCode:
+      properties:
+        step:
+          format: int32
+          minimum: 0
+          type: integer
+        totp:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - step
+      - totp
+    IdentifyUserResponse_oneOf:
+      properties:
+        ProvideCode:
+          $ref: "#/components/schemas/IdentifyUserResponse_oneOf_ProvideCode"
+      required:
+      - ProvideCode
+    Modify_oneOf:
+      example:
+        present:
+        - present
+        - present
+      properties:
+        present:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - present
+    Modify_oneOf_1:
+      properties:
+        removed:
+          items:
+            type: string
+          maxItems: 2
+          minItems: 2
+          type: array
+      required:
+      - removed
+    Modify_oneOf_2:
+      properties:
+        purged:
+          type: string
+      required:
+      - purged
+    OperationError_oneOf:
+      properties:
+        corruptedentry:
+          format: int64
+          minimum: 0
+          type: integer
+      required:
+      - corruptedentry
+    OperationError_oneOf_1:
+      properties:
+        corruptedindex:
+          type: string
+      required:
+      - corruptedindex
+    OperationError_oneOf_2:
+      properties:
+        consistencyerror:
+          items:
+            $ref: "#/components/schemas/ConsistencyError"
+          type: array
+      required:
+      - consistencyerror
+    OperationError_oneOf_3:
+      properties:
+        schemaviolation:
+          $ref: "#/components/schemas/SchemaError"
+      required:
+      - schemaviolation
+    OperationError_oneOf_4:
+      properties:
+        plugin:
+          $ref: "#/components/schemas/PluginError"
+      required:
+      - plugin
+    OperationError_oneOf_5:
+      properties:
+        invalidattributename:
+          type: string
+      required:
+      - invalidattributename
+    OperationError_oneOf_6:
+      properties:
+        invalidattribute:
+          type: string
+      required:
+      - invalidattribute
+    OperationError_oneOf_7:
+      properties:
+        invalidacpstate:
+          type: string
+      required:
+      - invalidacpstate
+    OperationError_oneOf_8:
+      properties:
+        invalidschemastate:
+          type: string
+      required:
+      - invalidschemastate
+    OperationError_oneOf_9:
+      properties:
+        invalidaccountstate:
+          type: string
+      required:
+      - invalidaccountstate
+    OperationError_oneOf_10:
+      properties:
+        missingclass:
+          type: string
+      required:
+      - missingclass
+    OperationError_oneOf_11:
+      properties:
+        missingattribute:
+          $ref: "#/components/schemas/Attribute"
+      required:
+      - missingattribute
+    OperationError_oneOf_12:
+      properties:
+        attributeuniqueness:
+          items:
+            $ref: "#/components/schemas/Attribute"
+          type: array
+      required:
+      - attributeuniqueness
+    OperationError_oneOf_13:
+      properties:
+        invalidauthstate:
+          type: string
+      required:
+      - invalidauthstate
+    OperationError_oneOf_14:
+      properties:
+        passwordquality:
+          items:
+            $ref: "#/components/schemas/PasswordFeedback"
+          type: array
+      required:
+      - passwordquality
+    OperationError_oneOf_15:
+      properties:
+        wait:
+          format: date-time
+          type: string
+      required:
+      - wait
+    PasswordFeedback_oneOf:
+      properties:
+        tooshort:
+          format: int32
+          minimum: 0
+          type: integer
+      required:
+      - tooshort
+    PluginError_oneOf:
+      properties:
+        base:
+          type: string
+      required:
+      - base
+    PluginError_oneOf_1:
+      properties:
+        referentialintegrity:
+          type: string
+      required:
+      - referentialintegrity
+    PluginError_oneOf_2:
+      properties:
+        credimport:
+          type: string
+      required:
+      - credimport
+    SchemaError_oneOf:
+      properties:
+        invalidclass:
+          items:
+            type: string
+          type: array
+      required:
+      - invalidclass
+    SchemaError_oneOf_1:
+      properties:
+        missingmustattribute:
+          items:
+            $ref: "#/components/schemas/Attribute"
+          type: array
+      required:
+      - missingmustattribute
+    SchemaError_oneOf_2:
+      properties:
+        invalidattributesyntax:
+          type: string
+      required:
+      - invalidattributesyntax
+    SchemaError_oneOf_3:
+      properties:
+        attributenotvalidforclass:
+          type: string
+      required:
+      - attributenotvalidforclass
+    SchemaError_oneOf_4:
+      properties:
+        supplementsnotsatisfied:
+          items:
+            type: string
+          type: array
+      required:
+      - supplementsnotsatisfied
+    SchemaError_oneOf_5:
+      properties:
+        excludesnotsatisfied:
+          items:
+            type: string
+          type: array
+      required:
+      - excludesnotsatisfied
+    SchemaError_oneOf_6:
+      properties:
+        phantomattribute:
+          type: string
+      required:
+      - phantomattribute
+    ScimSyncRetentionMode_oneOf:
+      description: |-
+        All entries that have their uuid present in this set are retained.
+        Anything not present will be deleted.
+      properties:
+        Retain:
+          description: |-
+            All entries that have their uuid present in this set are retained.
+            Anything not present will be deleted.
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - Retain
+    ScimSyncRetentionMode_oneOf_1:
+      description: |-
+        Any entry with its UUID in this set will be deleted. Anything not
+        present will be retained.
+      properties:
+        Delete:
+          description: |-
+            Any entry with its UUID in this set will be deleted. Anything not
+            present will be retained.
+          items:
+            format: uuid
+            type: string
+          type: array
+      required:
+      - Delete
+    ScimSyncState_oneOf_Active:
+      properties:
+        cookie:
+          items:
+            format: int32
+            minimum: 0
+            type: integer
+          type: array
+      required:
+      - cookie
+    ScimSyncState_oneOf:
+      properties:
+        Active:
+          $ref: "#/components/schemas/ScimSyncState_oneOf_Active"
+      required:
+      - Active
+    UatPurpose_oneOf_readwrite:
+      properties:
+        expiry:
+          description: |-
+            If none, there is no expiry, and this is always rw. If there is
+            an expiry, check that the current time < expiry.
+          format: date-time
+          nullable: true
+          type: string
+    UatPurpose_oneOf:
+      properties:
+        readwrite:
+          $ref: "#/components/schemas/UatPurpose_oneOf_readwrite"
+      required:
+      - readwrite
+    UatStatusState_oneOf:
+      properties:
+        expiresat:
+          format: date-time
+          type: string
+      required:
+      - expiresat
+    WebError_oneOf:
+      description: Something went wrong when doing things.
+      properties:
+        OperationError:
+          allOf:
+          - $ref: "#/components/schemas/OperationError"
+          description: Something went wrong when doing things.
+      required:
+      - OperationError
+    WebError_oneOf_1:
+      properties:
+        InternalServerError:
+          type: string
+      required:
+      - InternalServerError
+    WebError_oneOf_2:
+      properties:
+        OAuth2:
+          type: object
+      required:
+      - OAuth2
+  securitySchemes:
+    token_jwt:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
